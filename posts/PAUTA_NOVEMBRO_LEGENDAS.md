@@ -2,6 +2,7 @@
 
 Posts de conteúdo (sem preço) que completam a grade de 3 posts por dia junto com a campanha FONI BR 1 ANO.
 A campanha está em `CAMPANHA_1ANO_LEGENDAS.md`. Domingos sem postagem (exceto 29/11, campanha). Sábados só com a peça curta da campanha.
+18/11 às 18h fica com o teaser da campanha; o Reel de AirPods foi para 01/12 às 18h (`posts/2026-12-01/`).
 Cada post tem um story de chamada (`foni_story_...`) na mesma pasta.
 
 | Dia | 07h43 | 12h | 18h |
@@ -18,6 +19,7 @@ Cada post tem um story de chamada (`foni_story_...`) na mesma pasta.
 | 28/11 sáb | — | Campanha: Foni Upgrade | — |
 | 29/11 dom | — | Campanha: Reel unboxing (seu) | — |
 | 30/11 seg | Campanha: último dia | Início Rápido (carrossel 5) | Campanha: até meia-noite |
+| 01/12 ter | — | Campanha: agradecimento | Reel AirPods (movido de 18/11) |
 
 Hashtags padrão (opcional): #FoniBR #iPhone #Apple
 
