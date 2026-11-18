@@ -16,9 +16,11 @@ Atenção: já existe um Reel de AirPods agendado para 18h deste dia. Mova um do
 
 ## 19/11 (qui)
 
-**Story:** `foni_story_1ano_primeiro_iphone.jpg` + figurinha de caixinha de perguntas.
+Sem conteúdo da campanha: o dia ficou com o tema GTA 6 (stories "Nova Missão" às 07h40).
 
 ## 20/11 (sex) — História
+
+**Story (postar no app, entre 12h e 18h):** `foni_story_1ano_primeiro_iphone.jpg` + figurinha de caixinha de perguntas. Movido de 19/11.
 
 **18h — Feed:** `foni_18h_1ano_historia.jpg`
 > Começamos com um objetivo: fazer o iPhone caber no seu bolso, nos dois sentidos. Um ano depois, cada cliente que confiou na gente faz parte dessa história. Obrigado. Dia 27 tem mais.
