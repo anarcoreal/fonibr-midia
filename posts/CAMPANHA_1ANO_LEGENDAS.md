@@ -35,7 +35,7 @@ Atenção: já existe um Reel de AirPods agendado para 18h deste dia. Mova um do
 ## 23/11 (seg) — Revelação
 
 **12h — Carrossel (5):** `foni_12h_1ano_revelacao_01` a `_05.jpg`
-> Nosso primeiro aniversário cai na Black Friday, então fizemos as duas datas trabalharem para você. De 27 a 30/11: 20% OFF em todos os seminovos, Kit 1 Ano em toda compra e o mesmo desconto no site com o cupom FONI1ANO. Quer ver os preços antes de todo mundo? Comente VIP ou chame no direct.
+> Nosso primeiro aniversário cai na Black Friday, então fizemos as duas datas trabalharem para você. De 27 a 30/11: 10% OFF em todos os seminovos, Kit 1 Ano em toda compra e o mesmo desconto no site com o cupom FONI1ANO. Quer ver os preços antes de todo mundo? Comente VIP ou chame no direct.
 
 **Stories (4):** `foni_story_12h_1ano_revelacao_01` a `_04.jpg`
 
@@ -46,7 +46,7 @@ Atenção: já existe um Reel de AirPods agendado para 18h deste dia. Mova um do
 ## 25/11 (qua) — Garantia
 
 **18h — Carrossel (5):** `foni_18h_1ano_garantia_01` a `_05.jpg`
-> Seminovo bom é o que vem com garantia de verdade. Na Foni BR são 8 meses de garantia, a saúde da bateria informada em cada modelo e a recompra garantida pelo Foni Upgrade em até 12 meses. Dia 27 tudo isso vem com 20% OFF.
+> Seminovo bom é o que vem com garantia de verdade. Na Foni BR são 8 meses de garantia, a saúde da bateria informada em cada modelo e a recompra garantida pelo Foni Upgrade em até 12 meses. Dia 27 tudo isso vem com 10% OFF.
 
 **Story:** `foni_story_18h_1ano_garantia.jpg`
 
@@ -62,13 +62,13 @@ Atenção: já existe um Reel de AirPods agendado para 18h deste dia. Mova um do
 ## 27/11 (sex) — ANIVERSÁRIO + BLACK FRIDAY
 
 **07h43 — Carrossel (18):** `foni_0743_1ano_vitrine_01` a `_18.jpg`
-> Hoje a Foni BR faz um ano e o presente é seu. 20% OFF em todos os seminovos, 8 meses de garantia e Kit 1 Ano (capa + película) em toda compra. Até 30/11 ou enquanto durar o estoque. Consulte cores no direct.
+> Hoje a Foni BR faz um ano e o presente é seu. 10% OFF em todos os seminovos, 8 meses de garantia e Kit 1 Ano (capa + película) em toda compra. Até 30/11 ou enquanto durar o estoque. Consulte cores no direct.
 
 **12h — Feed:** `foni_12h_1ano_tabela.jpg`
 > A vitrine de aniversário inteira em uma imagem. Salve para consultar. Comprou pelo site? Use o cupom FONI1ANO.
 
 **18h — Reel:** `foni_reel_18h_1ano_vitrine.mp4` (26 s, sem áudio)
-> Os 16 seminovos da vitrine de aniversário, todos com 20% OFF até 30/11. Chame no direct.
+> Os 16 seminovos da vitrine de aniversário, todos com 10% OFF até 30/11. Chame no direct.
 
 **Stories:** `foni_story_0743_1ano_abertura.jpg` e, em sequência, `foni_story_1ano_modelo_01` a `_16.jpg` (um por modelo; adicione figurinha de link para o site ou "Chame no direct").
 
@@ -77,7 +77,7 @@ Destaque fixo "1 ANO" no perfil: adicionar os stories da campanha.
 ## 28/11 (sáb) — Foni Upgrade
 
 **12h — Feed:** `foni_12h_1ano_upgrade.jpg`
-> Comprou com a gente nos últimos 12 meses? Pelo Foni Upgrade seu aparelho vira crédito na troca por um mais novo. E até 30/11 o modelo novo sai com 20% OFF.
+> Comprou com a gente nos últimos 12 meses? Pelo Foni Upgrade seu aparelho vira crédito na troca por um mais novo. E até 30/11 o modelo novo sai com 10% OFF.
 
 **Story:** `foni_story_12h_1ano_upgrade.jpg`
 
@@ -93,7 +93,7 @@ Destaque fixo "1 ANO" no perfil: adicionar os stories da campanha.
 > A campanha de 1 ano termina hoje. Depois disso, os preços voltam ao normal.
 
 **18h — Feed:** `foni_18h_1ano_meia_noite.jpg`
-> Últimas horas de 20% OFF, Kit 1 Ano e cupom FONI1ANO. Chame no direct ou compre pelo site.
+> Últimas horas de 10% OFF, Kit 1 Ano e cupom FONI1ANO. Chame no direct ou compre pelo site.
 
 **Story:** `foni_story_1ano_ultimo_dia.jpg` + figurinha de contagem regressiva até 23h59.
 
