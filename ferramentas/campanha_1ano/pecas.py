@@ -209,6 +209,10 @@ def build():
     add("2026-11-28", "foni_story_12h_1ano_upgrade.jpg", "story",
         page(hero('Seu iPhone antigo <span class="g">vira crédito.</span>', "Troque pelo Foni Upgrade. Modelo novo com 20% OFF até 30/11.", "CHAME NO DIRECT &rarr;", mt=90), "story", badge="FONI UPGRADE"))
 
+    # 29/11 domingo (exceção Black Friday)
+    add("2026-11-29", "foni_story_12h_1ano_ate_amanha.jpg", "story",
+        page(hero('Só até <span class="g">amanhã.</span>', "20% OFF em todos os seminovos, Kit 1 Ano e cupom FONI1ANO.", "CHAME NO DIRECT &rarr;", mt=90), "story"))
+
     # 30/11 último dia
     add("2026-11-30", "foni_0743_1ano_ultimo_dia.jpg", "feed",
         page(hero('Último <span class="g">dia.</span>', "A campanha de 1 ano termina hoje. Depois disso, os preços voltam ao normal.", "20% OFF em todos os seminovos até meia-noite.", mt=220), "feed"))
