@@ -44,10 +44,10 @@ Fonte: Leonardo. Não inventar preço, cor ou estoque fora desta lista.
 | Modelo | Bateria | Cores | Preço cheio | Campanha 10% OFF |
 |---|---|---|---|---|
 | iPhone 11 128 GB | 100% | Branco | R$ 2.270 | R$ 2.043 |
-| iPhone 13 128 GB | 100% | Preto. Rosa e Branco | R$ 2.630 | R$ 2.367 |
+| iPhone 13 128 GB | 100% | Preto, Rosa e Branco | R$ 2.630 | R$ 2.367 |
 | iPhone 13 Pro 256 GB | 85%+ | Branco e Dourado | R$ 3.400 | R$ 3.060 |
-| iPhone 13 Pro Max 128 GB | 100% | Branco. Dourado. Preto e Azul | R$ 3.520 | R$ 3.168 |
-| iPhone 14 128 GB | 100% | Preto. Branco. Lilás e Azul | R$ 2.850 | R$ 2.565 |
+| iPhone 13 Pro Max 128 GB | 100% | Branco, Dourado, Preto e Azul | R$ 3.520 | R$ 3.168 |
+| iPhone 14 128 GB | 100% | Preto, Branco, Lilás e Azul | R$ 2.850 | R$ 2.565 |
 | iPhone 14 Pro 128 GB | 85%+ | Prata e Dourado | R$ 3.590 | R$ 3.231 |
 | iPhone 14 Pro 256 GB | 85%+ | Preto | R$ 3.720 | R$ 3.348 |
 | iPhone 14 Pro Max 128 GB | 90% | Dourado e Branco | R$ 3.900 | R$ 3.510 |
@@ -55,9 +55,9 @@ Fonte: Leonardo. Não inventar preço, cor ou estoque fora desta lista.
 | iPhone 15 128 GB | 85%+ | Preto e Azul | R$ 3.450 | R$ 3.105 |
 | iPhone 15 Pro 128 GB | 90% | Titânio Natural | R$ 4.170 | R$ 3.753 |
 | iPhone 15 Pro Max 256 GB | 90%+ | Titânio Natural | R$ 4.700 | R$ 4.230 |
-| iPhone 16 128 GB | 87%+ | Preto. Rosa e Branco | R$ 4.300 | R$ 3.870 |
+| iPhone 16 128 GB | 87%+ | Preto, Rosa e Branco | R$ 4.300 | R$ 3.870 |
 | iPhone 16 Pro 128 GB | 89%+ | Titânio Deserto e Natural | R$ 4.820 | R$ 4.338 |
-| iPhone 16 Pro 256 GB | 100% | Titânio Deserto. Natural. Branco e Preto | R$ 5.120 | R$ 4.608 |
+| iPhone 16 Pro 256 GB | 100% | Titânio Deserto, Natural, Branco e Preto | R$ 5.120 | R$ 4.608 |
 | iPhone 16 Pro Max 256 GB | 85%+ | Titânio Natural e Deserto | R$ 5.570 | R$ 5.013 |
 
 ## Campanha 1 Ano / Black Friday (27 a 30/11)
