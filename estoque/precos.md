@@ -62,3 +62,7 @@ Fonte: Leonardo. Não inventar preço, cor ou estoque fora desta lista.
 
 ## Campanha 1 Ano / Black Friday (27 a 30/11)
 - R$ 300 OFF fixo em qualquer iPhone, novo ou seminovo (definido pelo Leonardo em 18/11/2026: lucro mínimo de R$ 700 por aparelho, margem ~R$ 1.000). Substituiu os 10%/20% anteriores.
+
+## Condições (confirmadas pelo Leonardo em 18/11/2026)
+- Preços da lista são à vista. Parcelamento sempre tem juros (não anunciar "sem juros").
+- Garantia formalizada por termo de garantia digital, preenchido online (Jotform). Pode escrever "termo de garantia digital"; evite "garantia por escrito" no sentido de papel.
