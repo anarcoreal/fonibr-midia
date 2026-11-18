@@ -100,7 +100,7 @@ def modelo(m, g, b, c, de, por):
     return (f'<div class="model"><h1>{m}</h1><div class="spec">{g} &nbsp;·&nbsp; Bateria {b}</div>'
             f'<div class="cores">{c}</div><div class="de">De <s>{brl(de)}</s> por</div>'
             f'<div class="por">{brl(por)}</div><span class="off">R$ 300 OFF</span>'
-            f'<div class="perks">8 meses de garantia<br>Kit 1 Ano: capa + película</div></div>')
+            f'<div class="perks">8 meses de garantia<br>Capa + película de brinde</div></div>')
 
 
 def tabela():
@@ -109,7 +109,7 @@ def tabela():
         for m, g, b, c, de, por in VITRINE)
     return (f'<h1 style="font-size:64px;margin-top:44px">Vitrine 1 ano. <span class="g">R$ 300 OFF.</span></h1>'
             f'<table><tr><th>MODELO</th><th>ARMAZ.</th><th>BATERIA</th><th class="r">DE</th><th class="r">POR</th></tr>{rows}</table>'
-            f'<p class="note" style="margin-top:24px;font-size:24px">8 meses de garantia e Kit 1 Ano em toda compra. Até 30/11.</p>')
+            f'<p class="note" style="margin-top:24px;font-size:24px">8 meses de garantia e capa + película de brinde em toda compra. Até 30/11.</p>')
 
 
 # ---------------------------------------------------------------- peças
@@ -144,7 +144,7 @@ def build():
     rev = [
         page(hero('Nosso aniversário.<br><span class="g">Sua Black Friday.</span>', "De 27 a 30/11. Deslize para ver o presente.", mt=170), "feed", pg="01/05", swipe=True),
         page(item("R$300", "OFF em qualquer iPhone", "Vale para os <b>16 seminovos</b>, do iPhone 11 ao 16 Pro Max, e para os <b>iPhones novos</b>.", "Estoque limitado por modelo."), "feed", pg="02/05"),
-        page(item("+", "Kit 1 Ano em toda compra", "<b>Capa + película</b> de presente em qualquer aparelho comprado na campanha.", "Válido de 27 a 30/11."), "feed", pg="03/05"),
+        page(item("+", "Capa + película de brinde", "Em <b>qualquer iPhone</b> comprado na campanha, novo ou seminovo.", "Válido de 27 a 30/11."), "feed", pg="03/05"),
         page(item("%", "Cupom FONI1ANO no site", "Os mesmos <b>R$ 300 OFF</b> para quem compra pelo <b>fonibr.com.br</b>.", "O cupom não soma com o desconto da vitrine."), "feed", pg="04/05"),
         page(lista('Quer ver os preços <span class="g">antes de todo mundo?</span>',
                    ["Comente <b>VIP</b> neste post", "Ou chame no direct", "A lista VIP recebe a vitrine na noite de 26/11"],
@@ -155,7 +155,7 @@ def build():
     sr = [
         ('Nosso aniversário.<br><span class="g">Sua Black Friday.</span>', "De 27 a 30/11."),
         ('<span class="g">R$ 300 OFF</span> em qualquer iPhone.', "Novos e seminovos. 8 meses de garantia nos seminovos."),
-        ('<span class="g">Kit 1 Ano</span> em toda compra.', "Capa + película de presente."),
+        ('<span class="g">Capa + película</span> de brinde.', "Em qualquer iPhone da campanha."),
         ('Cupom <span class="g">FONI1ANO</span> no site.', "R$ 300 OFF no fonibr.com.br."),
     ]
     for i, (h, s) in enumerate(sr, 1):
@@ -169,7 +169,7 @@ def build():
         page(item("02", "Bateria informada", "A <b>saúde da bateria</b> de cada aparelho vem informada antes da compra.", "Você sabe exatamente o que está levando."), "feed", pg="03/05"),
         page(item("03", "Foni Upgrade", "<b>Recompra garantida</b> em até 12 meses. O valor vira crédito na troca por outro aparelho da Foni BR.", "Aparelho em bom estado."), "feed", pg="04/05"),
         page(lista('Dia 27, tudo isso com <span class="g">R$ 300 OFF.</span>',
-                   ["16 modelos de seminovos", "Kit 1 Ano: capa + película", "Cupom FONI1ANO no site"],
+                   ["16 modelos de seminovos", "Capa + película de brinde", "Cupom FONI1ANO no site"],
                    "De 27 a 30/11."), "feed", pg="05/05"),
     ]
     for i, h in enumerate(gar, 1):
@@ -190,7 +190,7 @@ def build():
     for i, r in enumerate(VITRINE, 2):
         vit.append(page(modelo(*r), "feed", badge="VITRINE 1 ANO", pg=f"{i:02d}/{n:02d}"))
     vit.append(page(lista('Até 30/11 ou <span class="g">enquanto durar.</span>',
-                          ["R$ 300 OFF em qualquer iPhone", "8 meses de garantia", "Kit 1 Ano: capa + película",
+                          ["R$ 300 OFF em qualquer iPhone", "8 meses de garantia", "Capa + película de brinde",
                            "Cupom FONI1ANO no fonibr.com.br"], "Chame no direct ou compre pelo site."),
                     "feed", pg=f"{n:02d}/{n:02d}"))
     for i, h in enumerate(vit, 1):
@@ -211,13 +211,13 @@ def build():
 
     # 29/11 domingo (exceção Black Friday)
     add("2026-11-29", "foni_story_12h_1ano_ate_amanha.jpg", "story",
-        page(hero('Só até <span class="g">amanhã.</span>', "R$ 300 OFF em qualquer iPhone, Kit 1 Ano e cupom FONI1ANO.", "CHAME NO DIRECT &rarr;", mt=90), "story"))
+        page(hero('Só até <span class="g">amanhã.</span>', "R$ 300 OFF em qualquer iPhone, capa + película de brinde e cupom FONI1ANO.", "CHAME NO DIRECT &rarr;", mt=90), "story"))
 
     # 30/11 último dia
     add("2026-11-30", "foni_0743_1ano_ultimo_dia.jpg", "feed",
         page(hero('Último <span class="g">dia.</span>', "A campanha de 1 ano termina hoje. Depois disso, os preços voltam ao normal.", "R$ 300 OFF em qualquer iPhone até meia-noite.", mt=220), "feed"))
     add("2026-11-30", "foni_18h_1ano_meia_noite.jpg", "feed",
-        page(hero('Até <span class="g">meia-noite.</span>', "Últimas horas de R$ 300 OFF, Kit 1 Ano e cupom FONI1ANO.", "Chame no direct ou compre pelo site.", mt=220), "feed"))
+        page(hero('Até <span class="g">meia-noite.</span>', "Últimas horas de R$ 300 OFF, capa + película de brinde e cupom FONI1ANO.", "Chame no direct ou compre pelo site.", mt=220), "feed"))
     add("2026-11-30", "foni_story_1ano_ultimo_dia.jpg", "story",
         page(hero('Último dia.<br><span class="g">Até meia-noite.</span>', "R$ 300 OFF em qualquer iPhone.", "CHAME NO DIRECT &rarr;", mt=90), "story"))
 

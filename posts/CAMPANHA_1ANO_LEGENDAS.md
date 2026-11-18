@@ -35,7 +35,7 @@ Atenção: já existe um Reel de AirPods agendado para 18h deste dia. Mova um do
 ## 23/11 (seg) — Revelação
 
 **12h — Carrossel (5):** `foni_12h_1ano_revelacao_01` a `_05.jpg`
-> Nosso primeiro aniversário cai na Black Friday, então fizemos as duas datas trabalharem para você. De 27 a 30/11: R$ 300 OFF em qualquer iPhone, Kit 1 Ano em toda compra e o mesmo desconto no site com o cupom FONI1ANO. Quer ver os preços antes de todo mundo? Comente VIP ou chame no direct.
+> Nosso primeiro aniversário cai na Black Friday, então fizemos as duas datas trabalharem para você. De 27 a 30/11: R$ 300 OFF em qualquer iPhone, capa + película de brinde em toda compra e o mesmo desconto no site com o cupom FONI1ANO. Quer ver os preços antes de todo mundo? Comente VIP ou chame no direct.
 
 **Stories (4):** `foni_story_12h_1ano_revelacao_01` a `_04.jpg`
 
@@ -62,7 +62,7 @@ Atenção: já existe um Reel de AirPods agendado para 18h deste dia. Mova um do
 ## 27/11 (sex) — ANIVERSÁRIO + BLACK FRIDAY
 
 **07h43 — Carrossel (18):** `foni_0743_1ano_vitrine_01` a `_18.jpg`
-> Hoje a Foni BR faz um ano e o presente é seu. R$ 300 OFF em qualquer iPhone, 8 meses de garantia e Kit 1 Ano (capa + película) em toda compra. Até 30/11 ou enquanto durar o estoque. Consulte cores no direct.
+> Hoje a Foni BR faz um ano e o presente é seu. R$ 300 OFF em qualquer iPhone, 8 meses de garantia e capa + película de brinde em toda compra. Até 30/11 ou enquanto durar o estoque. Consulte cores no direct.
 
 **12h — Feed:** `foni_12h_1ano_tabela.jpg`
 > A vitrine de aniversário inteira em uma imagem. Salve para consultar. Comprou pelo site? Use o cupom FONI1ANO.
@@ -83,7 +83,7 @@ Destaque fixo "1 ANO" no perfil: adicionar os stories da campanha.
 
 ## 29/11 (dom) — exceção pela Black Friday
 
-**12h — Reel gravado por você:** unboxing do Kit 1 Ano ou entrega de um aparelho da campanha.
+**12h — Reel gravado por você:** unboxing de um aparelho com a capa + película de brinde, ou entrega de um aparelho da campanha.
 
 **Story:** `foni_story_12h_1ano_ate_amanha.jpg`
 
@@ -93,7 +93,7 @@ Destaque fixo "1 ANO" no perfil: adicionar os stories da campanha.
 > A campanha de 1 ano termina hoje. Depois disso, os preços voltam ao normal.
 
 **18h — Feed:** `foni_18h_1ano_meia_noite.jpg`
-> Últimas horas de R$ 300 OFF, Kit 1 Ano e cupom FONI1ANO. Chame no direct ou compre pelo site.
+> Últimas horas de R$ 300 OFF, capa + película de brinde e cupom FONI1ANO. Chame no direct ou compre pelo site.
 
 **Story:** `foni_story_1ano_ultimo_dia.jpg` + figurinha de contagem regressiva até 23h59.
 
