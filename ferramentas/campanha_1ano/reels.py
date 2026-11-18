@@ -55,10 +55,10 @@ def numeros():
 
 
 def vitrine():
-    scenes = [(f'<span class="badge">1 ANO</span><div class="h">A vitrine<br><span class="g">abriu.</span></div><div class="sub">10% OFF em todos os seminovos.</div><div class="line"></div>', 2.6)]
+    scenes = [(f'<span class="badge">1 ANO</span><div class="h">A vitrine<br><span class="g">abriu.</span></div><div class="sub">R$ 300 OFF em qualquer iPhone.</div><div class="line"></div>', 2.6)]
     for m, g, b, c, de, por in VITRINE:
         scenes.append((f'<span class="badge">VITRINE 1 ANO</span><div class="model">{m}</div><div class="spec">{g} &nbsp;·&nbsp; Bateria {b}</div>'
-                       f'<div class="de">De <s>{brl(de)}</s> por</div><div class="por">{brl(por)}</div><span class="off">10% OFF</span>', 1.25))
+                       f'<div class="de">De <s>{brl(de)}</s> por</div><div class="por">{brl(por)}</div><span class="off">R$ 300 OFF</span>', 1.25))
     scenes.append((f'<div class="h">Até <span class="g">30/11.</span></div><div class="sub">8 meses de garantia.<br>Kit 1 Ano: capa + película.<br>Cupom FONI1ANO no site.</div>'
                    f'<div class="cta">Chame no direct.</div><img class="logo" src="data:image/png;base64,{LOGO}"><div class="line"></div>', 3.6))
     return scenes

@@ -1,6 +1,6 @@
 """Dados da campanha FONI BR 1 ANO (18/11 a 01/12/2026)."""
 
-# Vitrine de aniversário: seminovos com 10% OFF sobre o preço cheio (desconto da campanha alterado de 20% para 10% pelo dono em 18/11/2026)
+# Vitrine de aniversário: seminovos com R$ 300 OFF sobre o preço cheio (definido pelo dono em 18/11/2026: desconto fixo de R$ 300 em qualquer iPhone para manter lucro mínimo de R$ 700)
 VITRINE = [
     ("iPhone 11",         "128 GB", "100%", "Branco",                                   2270, 1816),
     ("iPhone 13",         "128 GB", "100%", "Preto, Rosa e Branco",                     2630, 2104),
@@ -20,9 +20,9 @@ VITRINE = [
     ("iPhone 16 Pro Max", "256 GB", "85%+", "Titânio Natural e Deserto",                5570, 4456),
 ]
 
-DESCONTO = 0.10
+DESCONTO = 300
 # recalcula o "por" a partir do preço cheio
-VITRINE = [(m, g, b, c, de, round(de * (1 - DESCONTO))) for m, g, b, c, de, _ in VITRINE]
+VITRINE = [(m, g, b, c, de, de - DESCONTO) for m, g, b, c, de, _ in VITRINE]
 
 
 def brl(v):
