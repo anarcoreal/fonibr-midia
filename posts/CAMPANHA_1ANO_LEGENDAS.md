@@ -1,6 +1,6 @@
 # Campanha FONI BR 1 ANO — calendário e legendas
 
-Período: 18/11 a 01/12/2026. Arquivos em `posts/<data>/`. Posts de feed em 1080x1350, stories e Reels em 1080x1920.
+Período: 18/11 a 01/12/2026. Domingos sem postagem; sábados com conteúdo curto. Arquivos em `posts/<data>/`. Posts de feed em 1080x1350, stories e Reels em 1080x1920.
 Hashtags padrão (opcional, no fim da legenda): #FoniBR #iPhone #iPhoneSeminovo #BlackFriday
 
 ---
@@ -83,12 +83,14 @@ Destaque fixo "1 ANO" no perfil: adicionar os stories da campanha.
 
 ## 29/11 (dom)
 
-**12h — Reel gravado por você:** unboxing do Kit 1 Ano ou entrega de um aparelho da campanha.
+Sem postagem (domingo).
 
 ## 30/11 (seg) — Último dia
 
 **07h43 — Feed:** `foni_0743_1ano_ultimo_dia.jpg`
 > A campanha de 1 ano termina hoje. Depois disso, os preços voltam ao normal.
+
+**12h — Reel gravado por você:** unboxing do Kit 1 Ano ou entrega de um aparelho da campanha.
 
 **18h — Feed:** `foni_18h_1ano_meia_noite.jpg`
 > Últimas horas de 20% OFF, Kit 1 Ano e cupom FONI1ANO. Chame no direct ou compre pelo site.
