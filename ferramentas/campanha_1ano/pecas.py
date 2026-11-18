@@ -119,9 +119,9 @@ def build():
 
     # 18/11 teaser
     add("2026-11-18", "foni_18h_1ano_teaser.jpg", "feed",
-        page(one('Algo completa <span class="g">1 ano</span> no dia 27.', "Ative as notificações. O presente é seu."), "feed"))
+        page(one('Dia 27 a gente faz aniversário. <span class="g">Quem ganha presente é você.</span>', "Ative as notificações.", cls="h1l"), "feed"))
     add("2026-11-18", "foni_story_18h_1ano_teaser.jpg", "story",
-        page(one('Algo completa <span class="g">1 ano</span> no dia 27.', "Ative o lembrete na contagem regressiva abaixo.") + '<div class="space" style="height:260px"></div>', "story"))
+        page(hero('Dia 27 a gente faz aniversário. <span class="g">Quem ganha presente é você.</span>', "Ative o lembrete na contagem regressiva abaixo.", mt=60), "story"))
 
     # 19/11 caixinha
     add("2026-11-19", "foni_story_1ano_primeiro_iphone.jpg", "story",
