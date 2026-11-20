@@ -13,21 +13,26 @@ FPS = 30
 BASE_CSS = """
 *{margin:0;padding:0;box-sizing:border-box}
 body{width:1080px;height:1920px;background:#000;color:#fff;font-family:'Inter',sans-serif;overflow:hidden;position:relative}
-.s{position:absolute;left:96px;right:120px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;opacity:0}
-.badge{align-self:flex-start;border:2px solid #22C55E;color:#22C55E;font-weight:700;font-size:30px;letter-spacing:7px;padding:14px 30px;border-radius:999px;margin-bottom:60px}
-.big{font-weight:900;font-size:300px;line-height:.9;letter-spacing:-10px}
-.mid{font-weight:900;font-size:200px;line-height:.92;letter-spacing:-7px}
-.h{font-weight:800;font-size:112px;line-height:1.02;letter-spacing:-3px}
-.sub{font-weight:300;font-size:52px;color:#cfcfcf;margin-top:44px;line-height:1.3}
+.s{position:absolute;left:80px;right:80px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;opacity:0}
+.badge{display:none}
+.big{font-weight:200;font-size:320px;line-height:.9;letter-spacing:-0.05em}
+.mid{font-weight:600;font-size:200px;line-height:.92;letter-spacing:-0.05em}
+.h{font-weight:600;font-size:120px;line-height:1.03;letter-spacing:-0.045em}
+.tail{color:#8E8E93;display:block}
+.sub{font-weight:400;font-size:50px;color:#A8A8A8;margin-top:44px;line-height:1.3}
 .g{color:#22C55E}
-.line{height:5px;margin-top:60px;background:linear-gradient(90deg,rgba(29,179,60,0),#1DB33C 15%,#1DB33C 33%,#F2E205 33%,#F2E205 66%,#1F7BEA 66%,#1F7BEA 85%,rgba(31,123,234,0));transform-origin:left;width:100%}
-.logo{height:96px;margin-top:90px;align-self:flex-start}
-.cta{font-weight:700;font-size:50px;margin-top:56px;line-height:1.3}
-.model{font-weight:800;font-size:104px;letter-spacing:-3px;line-height:1.02}
-.spec{font-weight:600;font-size:44px;margin-top:28px}
-.de{font-weight:300;font-size:46px;color:#8a8a8a;margin-top:80px}
-.por{font-weight:900;font-size:180px;color:#22C55E;letter-spacing:-6px;line-height:1;margin-top:6px}
-.off{align-self:flex-start;background:#22C55E;color:#000;font-weight:800;font-size:34px;letter-spacing:4px;padding:12px 26px;border-radius:999px;margin-top:40px}
+.line{display:none}
+.logo{width:380px;margin-top:90px}
+.slogan{font-size:28px;letter-spacing:.32em;font-weight:500;color:#BDBDBD;margin-top:30px}
+.cta{font-weight:500;font-size:50px;margin-top:56px;line-height:1.3}
+.model{font-weight:600;font-size:110px;letter-spacing:-0.045em;line-height:1.02}
+.spec{font-weight:500;font-size:44px;margin-top:28px;color:#EDEDED}
+.de{font-weight:400;font-size:46px;color:#8a8a8a;margin-top:80px}
+.por{font-weight:600;font-size:190px;color:#22C55E;letter-spacing:-0.04em;line-height:1;margin-top:6px}
+.off{font-weight:600;font-size:34px;letter-spacing:.24em;color:#22C55E;margin-top:40px}
+.toplogo{position:absolute;top:220px;left:0;right:0;display:flex;justify-content:center}
+.toplogo img{width:300px}
+.glow{position:absolute;left:0;bottom:330px;width:1080px;height:360px}
 """
 
 ANIM_JS = """
@@ -48,20 +53,30 @@ def numeros():
         ('<div class="big g" data-count="180">0</div><div class="sub">aparelhos entregues.</div>', 2.6),
         ('<div class="big g" data-count="15" data-pre="+">+0</div><div class="sub">cidades atendidas.</div>', 2.6),
         ('<div class="big g" data-count="40" data-pre="+">+0</div><div class="sub">trocas no Foni Upgrade.</div>', 2.6),
-        ('<span class="badge">SEMINOVOS</span><div class="h"><span class="g">8 meses</span> de garantia.</div><div class="sub">Em cada seminovo.</div>', 2.6),
-        (f'<div class="h">1 ano.<br><span class="g">Apple ao seu alcance.</span></div><div class="cta">Dia 27 o presente é seu.</div><img class="logo" src="data:image/png;base64,{LOGO}"><div class="line"></div>', 3.4),
+        ('<span class="badge">SEMINOVOS</span><div class="h">8 meses<span class="tail">de garantia</span></div><div class="sub">Em cada seminovo.</div>', 2.6),
+        (f'<div class="h">1 ano<span class="tail">Apple ao seu alcance</span></div><div class="cta">Dia 27 o presente é seu.</div>', 3.4),
     ]
     return scenes
 
 
 def vitrine():
-    scenes = [(f'<span class="badge">1 ANO</span><div class="h">A vitrine<br><span class="g">abriu.</span></div><div class="sub">R$ 300 OFF em qualquer iPhone.</div><div class="line"></div>', 2.6)]
+    scenes = [(f'<span class="badge">1 ANO</span><div class="h">A vitrine<span class="tail">abriu</span></div><div class="sub">R$ 300 OFF em qualquer iPhone.</div><div class="line"></div>', 2.6)]
     for m, g, b, c, de, por in VITRINE:
         scenes.append((f'<span class="badge">VITRINE 1 ANO</span><div class="model">{m}</div><div class="spec">{g} &nbsp;·&nbsp; Bateria {b}</div>'
                        f'<div class="de">De <s>{brl(de)}</s> por</div><div class="por">{brl(por)}</div><span class="off">R$ 300 OFF</span>', 1.25))
-    scenes.append((f'<div class="h">Até <span class="g">30/11.</span></div><div class="sub">8 meses de garantia.<br>Capa + película de brinde.<br>Cupom FONI1ANO no site.</div>'
-                   f'<div class="cta">Chame no direct.</div><img class="logo" src="data:image/png;base64,{LOGO}"><div class="line"></div>', 3.6))
+    scenes.append((f'<div class="h">Até 30/11</div><div class="sub">8 meses de garantia.<br>Capa + película de brinde.<br>Cupom FONI1ANO no site.</div>'
+                   f'<div class="cta">Chame no direct.</div>', 3.6))
     return scenes
+
+
+GL = "#5CFF9A"
+CHROME = (f'<div class="toplogo"><img src="data:image/png;base64,{LOGO}"></div>'
+          f'<svg class="glow" viewBox="0 0 1080 360"><defs><linearGradient id="sg" x1="0" x2="1">'
+          f'<stop offset="0" stop-color="{GL}" stop-opacity="0"/><stop offset=".55" stop-color="{GL}"/>'
+          f'<stop offset="1" stop-color="{GL}" stop-opacity="0"/></linearGradient><filter id="sb" x="-10%" y="-200%" width="120%" height="500%">'
+          f'<feGaussianBlur stdDeviation="14"/></filter></defs>'
+          f'<path d="M-60 300 Q560 70 1140 230" stroke="url(#sg)" stroke-width="22" fill="none" filter="url(#sb)" opacity=".6"/>'
+          f'<path d="M-60 300 Q560 70 1140 230" stroke="url(#sg)" stroke-width="3" fill="none" opacity=".8"/></svg>')
 
 
 def html(scenes):
@@ -71,7 +86,7 @@ def html(scenes):
         S.append(f'["s{i}",{t:.3f},{t + d:.3f},{"true" if i == len(scenes) - 1 else "false"}]')
         t += d
     js = "const S=[" + ",".join(S) + "];" + ANIM_JS
-    return f'<html><head><meta charset="utf-8"><style>{BASE_CSS}</style></head><body>{"".join(divs)}<script>{js}</script></body></html>', t
+    return f'<html><head><meta charset="utf-8"><style>{BASE_CSS}</style></head><body>{CHROME}{"".join(divs)}<script>{js}</script></body></html>', t
 
 
 async def render(scenes, out_path):

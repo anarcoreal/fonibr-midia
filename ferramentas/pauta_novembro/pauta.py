@@ -4,7 +4,7 @@ Uso: python3 pauta.py
 import os, sys, asyncio
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "campanha_1ano"))
 from playwright.async_api import async_playwright
-from pecas import page, hero, item, lista, ROOT
+from pecas import page, hero, item, lista, ROOT, titulo, PROTEGIDOS, INICIO
 import reels
 
 G = '<span class="g">{}</span>'.format
@@ -44,14 +44,13 @@ def reel(d, nome, scenes, st_h1, st_sub=""):
 
 
 def rs(badge, h, sub=""):
-    b = f'<span class="badge">{badge}</span>' if badge else ""
     s = f'<div class="sub">{sub}</div>' if sub else ""
-    return f'{b}<div class="h">{h}</div>{s}'
+    return f'<div class="h">{titulo(h)}</div>{s}'
 
 
 def rfinal():
-    return (f'<div class="h">Siga para <span class="g">mais dicas.</span></div><div class="cta">@fonibroficial</div>'
-            f'<img class="logo" src="data:image/png;base64,{reels.LOGO}"><div class="line"></div>')
+    return (f'<div class="h">Siga para<span class="tail">mais dicas</span></div><div class="cta">@fonibroficial</div>'
+            f'<div class="slogan">APPLE AO SEU ALCANCE.</div>')
 
 
 # ------------------------------------------------------------------ 19/11
@@ -182,15 +181,23 @@ async def main():
         st = await b.new_page(viewport={"width": 1080, "height": 1920})
         n = 0
         for d, nome, htmls in POSTS:
+            if d < INICIO:
+                continue
             out = os.path.join(ROOT, "posts", d); os.makedirs(out, exist_ok=True)
             for i, h in enumerate(htmls, 1):
+                if (d, f"{nome}_{i:02d}.jpg") in PROTEGIDOS:
+                    continue
                 await feed.set_content(h, wait_until="load")
                 await feed.screenshot(path=os.path.join(out, f"{nome}_{i:02d}.jpg"), type="jpeg", quality=95); n += 1
         for d, nome, h in STORIES:
+            if d < INICIO:
+                continue
             await st.set_content(h, wait_until="load")
             await st.screenshot(path=os.path.join(ROOT, "posts", d, f"{nome}.jpg"), type="jpeg", quality=95); n += 1
         await b.close()
     for d, nome, scenes in REELS:
+        if d <= INICIO:
+            continue
         await reels.render(scenes, os.path.join(ROOT, "posts", d, f"{nome}.mp4")); n += 1
     print(n, "arquivos")
 
