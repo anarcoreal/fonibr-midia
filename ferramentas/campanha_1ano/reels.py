@@ -12,26 +12,26 @@ FPS = 30
 
 BASE_CSS = """
 *{margin:0;padding:0;box-sizing:border-box}
-body{width:1080px;height:1920px;background:#000;color:#fff;font-family:'Inter',sans-serif;overflow:hidden;position:relative}
-.s{position:absolute;left:80px;right:80px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;opacity:0}
+body{width:1080px;height:1920px;background:#000;color:#F5F5F7;font-family:'Inter',sans-serif;overflow:hidden;position:relative;-webkit-font-smoothing:antialiased}
+.s{position:absolute;left:96px;right:96px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;text-align:left;opacity:0}
 .badge{display:none}
-.big{font-weight:200;font-size:320px;line-height:.9;letter-spacing:-0.05em}
-.mid{font-weight:600;font-size:200px;line-height:.92;letter-spacing:-0.05em}
-.h{font-weight:600;font-size:120px;line-height:1.03;letter-spacing:-0.045em}
-.tail{color:#8E8E93;display:block}
-.sub{font-weight:400;font-size:50px;color:#A8A8A8;margin-top:44px;line-height:1.3}
-.g{color:#22C55E}
+.big{font-weight:300;font-size:260px;line-height:.95;letter-spacing:-0.055em;color:#30D158}
+.mid{font-weight:300;font-size:200px;line-height:.95;letter-spacing:-0.055em}
+.h{font-weight:600;font-size:96px;line-height:1.06;letter-spacing:-0.04em}
+.tail{color:#86868B;display:block}
+.sub{font-weight:400;font-size:40px;color:#A1A1A6;margin-top:36px;line-height:1.45}
+.g{color:#30D158}
 .line{display:none}
-.logo{width:380px;margin-top:90px}
-.slogan{font-size:28px;letter-spacing:.32em;font-weight:500;color:#BDBDBD;margin-top:30px}
-.cta{font-weight:500;font-size:50px;margin-top:56px;line-height:1.3}
-.model{font-weight:600;font-size:110px;letter-spacing:-0.045em;line-height:1.02}
-.spec{font-weight:500;font-size:44px;margin-top:28px;color:#EDEDED}
-.de{font-weight:400;font-size:46px;color:#8a8a8a;margin-top:80px}
-.por{font-weight:600;font-size:190px;color:#22C55E;letter-spacing:-0.04em;line-height:1;margin-top:6px}
-.off{font-weight:600;font-size:34px;letter-spacing:.24em;color:#22C55E;margin-top:40px}
-.toplogo{position:absolute;top:220px;left:0;right:0;display:flex;justify-content:center}
-.toplogo img{width:300px}
+.logo{display:none}
+.slogan{font-size:24px;letter-spacing:.3em;color:#8E8E93;margin-top:60px}
+.cta{font-weight:500;font-size:42px;margin-top:44px;line-height:1.3}
+.model{font-weight:600;font-size:96px;letter-spacing:-0.04em;line-height:1.04}
+.spec{font-weight:500;font-size:40px;margin-top:24px;color:#E5E5EA}
+.de{font-weight:400;font-size:40px;color:#8E8E93;margin-top:70px}
+.por{font-weight:300;font-size:190px;color:#30D158;letter-spacing:-0.05em;line-height:1;margin-top:6px}
+.off{font-weight:500;font-size:28px;letter-spacing:.2em;color:#30D158;margin-top:30px}
+.toplogo{position:absolute;top:250px;left:96px}
+.toplogo img{width:220px}
 .glow{position:absolute;left:0;bottom:330px;width:1080px;height:360px}
 """
 

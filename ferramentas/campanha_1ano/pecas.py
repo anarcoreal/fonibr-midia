@@ -1,6 +1,6 @@
 """Gera posts do feed (1080x1350) e stories (1080x1920) da campanha FONI BR 1 ANO.
-Novo padrão visual (aprovado em 19/11/2026): capa centralizada com logo no topo e linha de luz,
-sem etiqueta e sem rodapé em todo slide; slogan só no último slide; frases grandes sem ponto final.
+Sistema editorial (aprovado em 20/11/2026): uma margem (96px), tudo alinhado à esquerda, uma escala de texto;
+logo pequena no alto à esquerda; variação só na altura do bloco e na linha de luz; frases grandes sem ponto final.
 Uso: python3 pecas.py  -> grava em ../../posts/<data>/ (a partir de 21/11; 20/11 só stories)
 """
 import os, re, base64, asyncio
@@ -16,8 +16,7 @@ GL = "#5CFF9A"   # brilho da linha de luz
 DIM = "#8E8E93"
 
 # peças aprovadas manualmente (ferramentas/novo_padrao/gerar.py) que não devem ser sobrescritas
-PROTEGIDOS = {("2026-11-20", n) for n in
-              [f"foni_12h_apple_watch_{i:02d}.jpg" for i in range(1, 6)] + ["foni_18h_1ano_historia.jpg"]}
+PROTEGIDOS = set()  # as capas aprovadas vêm de ferramentas/novo_padrao/capas_aprovadas.py
 INICIO = "2026-11-20"
 EXTRA = {"foni_story_1ano_primeiro_iphone.jpg"}  # postado em 20/11
 
@@ -42,60 +41,72 @@ def streak(bottom, opacity=1.0, d="M-60 300 Q560 70 1140 230"):
             f'<path d="{d}" stroke="url(#sg)" stroke-width="3" fill="none"/></svg>')
 
 
+G2 = "#30D158"
+M = 96
+
+
+def luz(kind, H, op=1.0):
+    if not kind:
+        return ""
+    k = H / 1350
+    d = {"base": f"M-60 {H-200} Q540 {H-340} 1140 {H-260}", "meio": f"M-60 {int(760*k)} Q560 {int(610*k)} 1140 {int(700*k)}",
+         "topo": f"M-60 {int(330*k)} Q500 {int(150*k)} 1140 {int(120*k)}", "lado": f"M1000 160 Q900 {H//2} 1010 {H+50}"}[kind]
+    return (f'<svg class="glow" width="1080" height="{H}" viewBox="0 0 1080 {H}" style="opacity:{op}">'
+            f'<defs><linearGradient id="sg" x1="0" x2="1"><stop offset="0" stop-color="{GL}" stop-opacity="0"/>'
+            f'<stop offset=".55" stop-color="{GL}"/><stop offset="1" stop-color="{GL}" stop-opacity="0"/></linearGradient>'
+            f'<filter id="sb" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="14"/></filter></defs>'
+            f'<path d="{d}" stroke="url(#sg)" stroke-width="20" fill="none" filter="url(#sb)" opacity=".6"/>'
+            f'<path d="{d}" stroke="url(#sg)" stroke-width="2.5" fill="none"/></svg>')
+
+
+def brilho(op=.8):
+    sp = [(-200, 980, "#1DB33C", .5), (260, 1100, "#F2C230", .25), (560, 1040, "#2F6BEA", .42)]
+    return ('<div style="position:absolute;inset:0;filter:blur(140px);opacity:%s">' % op +
+            "".join(f'<div style="position:absolute;left:{x}px;top:{y}px;width:560px;height:520px;border-radius:50%;background:{c};opacity:{o}"></div>'
+                    for x, y, c, o in sp) + "</div>")
+
+
 CSS = """
 *{margin:0;padding:0;box-sizing:border-box}
-body{width:1080px;height:%(H)dpx;background:#000;color:#fff;font-family:'Inter',sans-serif;overflow:hidden;position:relative}
-.glow{position:absolute;left:0;width:1080px;height:360px;pointer-events:none}
-.toplogo{position:absolute;top:%(LOGOTOP)dpx;left:0;right:0;display:flex;justify-content:center}
-.toplogo img{width:330px}
-.botlogo{position:absolute;bottom:%(BOT)dpx;left:0;right:0;display:flex;justify-content:center}
-.botlogo img{width:220px;opacity:.9}
-.slogan{position:absolute;bottom:%(BOT)dpx;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:26px}
-.slogan img{width:300px}
-.slogan span{font-size:24px;letter-spacing:.32em;font-weight:500;color:#BDBDBD}
-.count{position:absolute;top:%(CTOP)dpx;right:96px;font-size:26px;letter-spacing:.12em;color:#5A5A5A}
-.swipe{position:absolute;bottom:%(BOT)dpx;left:0;right:0;text-align:center;font-size:24px;letter-spacing:.24em;color:#6E6E6E;font-weight:500}
-.tail{color:%(DIM)s;display:block}
-h1{font-weight:600;letter-spacing:-0.045em;line-height:1.04}
-b{font-weight:600;color:#fff}
-.cover{position:absolute;left:80px;right:80px;top:%(CVTOP)dpx;bottom:%(CVBOT)dpx;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
-.cover h1{font-size:%(XL)dpx}
-.cover h1.huge{font-size:%(HUGE)dpx;letter-spacing:-0.06em;line-height:.92}
-.cover .sub{font-weight:400;font-size:%(SUB)dpx;color:#A8A8A8;line-height:1.35;margin-top:36px;max-width:880px}
-.cover .cta{font-weight:500;font-size:%(CTA)dpx;color:#fff;margin-top:48px;line-height:1.35}
-.cover .tap{font-weight:500;font-size:26px;letter-spacing:.2em;color:#8A8A8A;margin-top:70px}
-.inner{position:absolute;left:96px;right:96px;top:%(INTOP)dpx}
-.num{font-weight:200;font-size:200px;line-height:1;color:%(G1)s;letter-spacing:-0.04em}
-.num.word{font-size:150px}
-.inner h1{font-size:84px;margin-top:40px}
-.inner h1.first{margin-top:0}
-.body{font-weight:400;font-size:44px;line-height:1.38;margin-top:44px;color:#EDEDED}
-.note{font-weight:400;font-size:32px;line-height:1.45;margin-top:36px;color:#8A8A8A}
-.rows{margin-top:44px}
-.rows div{font-size:36px;line-height:1.35;padding:22px 0;border-bottom:1px solid #1E1E1E;color:#E6E6E6}
-.inner .cta{font-weight:500;font-size:36px;margin-top:44px;color:#fff;line-height:1.35}
-.model h1{font-size:96px;margin-top:0}
-.spec{font-weight:500;font-size:38px;margin-top:28px;color:#EDEDED}
-.cores{font-weight:400;font-size:32px;color:#8A8A8A;margin-top:16px;line-height:1.35}
-.de{font-weight:400;font-size:38px;color:#8A8A8A;margin-top:%(DEMT)dpx}
-.de s{text-decoration-thickness:2px}
-.por{font-weight:600;font-size:%(POR)dpx;color:%(G1)s;letter-spacing:-0.04em;line-height:1;margin-top:10px}
-.off{font-weight:600;font-size:28px;letter-spacing:.24em;color:%(G1)s;margin-top:30px}
-.perks{font-weight:400;font-size:30px;color:#A8A8A8;margin-top:36px;line-height:1.5}
-table{width:100%%;border-collapse:collapse;margin-top:36px}
-td,th{font-size:25px;padding:8px 0;border-bottom:1px solid #1A1A1A;text-align:left}
-th{font-weight:500;color:#6E6E6E;letter-spacing:2px;font-size:20px}
-td{font-weight:400;color:#DDD}
-td.m{font-weight:600;color:#fff}
-td.r,th.r{text-align:right}
-td.p{font-weight:600;color:%(G1)s;text-align:right}
-td.d{color:#6E6E6E;text-align:right}
+body{width:1080px;height:%(H)dpx;background:#000;color:#F5F5F7;font-family:'Inter',sans-serif;overflow:hidden;position:relative;-webkit-font-smoothing:antialiased}
+.glow{position:absolute;left:0;top:0;pointer-events:none}
+.logo{position:absolute;left:96px;top:%(LT)dpx}.logo img{width:200px;display:block}
+.count{position:absolute;right:96px;top:%(CT)dpx;font-size:24px;letter-spacing:.12em;color:#48484A}
+.blk{position:absolute;left:96px;right:96px}
+.eb{font-size:24px;letter-spacing:.2em;font-weight:500;color:#8E8E93;text-transform:uppercase}
+.eb.g{color:%(G2)s;letter-spacing:.04em;text-transform:none;font-size:28px}
+.dp{font-size:210px;font-weight:300;letter-spacing:-0.055em;line-height:.95;white-space:nowrap;margin-top:28px}
+h1{font-size:%(HD)dpx;font-weight:600;letter-spacing:-0.04em;line-height:1.06;margin-top:28px}
+h1.first{margin-top:0}
+.tail{display:block;color:#86868B}
+.bd{font-size:34px;font-weight:400;line-height:1.45;color:#A1A1A6;margin-top:32px;max-width:840px}
+.bd.w{color:#E5E5EA}
+.bd b{color:#F5F5F7;font-weight:600}
+.note{font-size:28px;font-weight:400;line-height:1.45;color:#6E6E73;margin-top:20px;max-width:840px}
+.tap{font-size:24px;letter-spacing:.2em;font-weight:500;color:#8E8E93;margin-top:56px;text-transform:uppercase}
+.cta{font-size:34px;font-weight:500;color:#F5F5F7;margin-top:40px}
+.rows{margin-top:40px}.rows div{padding:22px 0;border-bottom:1px solid #1C1C1E;font-size:34px;color:#E5E5EA}
+.slogan{font-size:22px;letter-spacing:.3em;color:#8E8E93;margin-top:64px}
+.spec{font-size:34px;font-weight:500;margin-top:20px;color:#E5E5EA}
+.cores{font-size:28px;color:#8E8E93;margin-top:10px}
+.de{font-size:34px;color:#8E8E93;margin-top:60px}
+.por{font-size:170px;font-weight:300;letter-spacing:-0.05em;line-height:1;color:%(G2)s;margin-top:6px;white-space:nowrap}
+.off{font-size:24px;letter-spacing:.2em;font-weight:500;color:%(G2)s;margin-top:24px}
+.perks{font-size:30px;color:#A1A1A6;margin-top:30px;line-height:1.5}
+table{width:100%%;border-collapse:collapse;margin-top:30px}
+td,th{font-size:25px;padding:8px 0;border-bottom:1px solid #1C1C1E;text-align:left}
+th{font-weight:500;color:#6E6E73;letter-spacing:2px;font-size:19px}
+td{color:#D1D1D6}td.m{font-weight:600;color:#F5F5F7}td.r,th.r{text-align:right}
+td.p{font-weight:600;color:%(G2)s;text-align:right}td.d{color:#6E6E73;text-align:right}
 """
 
-FEED = dict(H=1350, LOGOTOP=92, BOT=76, CTOP=104, CVTOP=200, CVBOT=150, XL=100, HUGE=300, SUB=38, CTA=36,
-            INTOP=300, DEMT=70, POR=150, GLOWB=170, G1=G1, DIM=DIM)
-STORY = dict(H=1920, LOGOTOP=260, BOT=300, CTOP=272, CVTOP=380, CVBOT=420, XL=112, HUGE=340, SUB=42, CTA=40,
-             INTOP=420, DEMT=70, POR=170, GLOWB=400, G1=G1, DIM=DIM)
+FEED = dict(H=1350, LT=96, CT=100, HD=80, G2=G2)
+STORY = dict(H=1920, LT=250, CT=254, HD=88, G2=G2)
+
+# a variação vem só da altura do bloco e da linha de luz
+CAPAS = [("baixo", "topo"), ("topo", "base"), ("meio", "lado"), ("baixo", "meio"), ("topo", "base")]
+DENTRO = [("topo", "base"), ("meio", "lado"), ("baixo", "topo")]
+_n = [0]
 
 
 def _kind(pg):
@@ -105,32 +116,47 @@ def _kind(pg):
     return "cover" if a == "01" else ("last" if a == b else "inner")
 
 
+def _pos(where, H):
+    if where == "baixo":
+        return f"bottom:{150 if H == 1350 else 520}px"
+    if where == "topo":
+        return f"top:{300 if H == 1350 else 460}px"
+    return "top:50%;transform:translateY(-50%)"
+
+
 def page(inner, fmt, badge=None, pg=None, swipe=False, kind=None):
-    """badge é ignorado no novo padrão (sem etiqueta)."""
     P = FEED if fmt == "feed" else STORY
+    H = P["H"]
     kind = kind or _kind(pg)
-    body = ""
-    if kind == "cover":
-        body += f'<div class="toplogo"><img src="{LOGO_URI}"></div>{streak(P["GLOWB"])}{inner}'
-        if swipe:
-            body += '<div class="swipe">DESLIZE</div>'
+    eb = f'<div class="eb">{badge}</div>' if badge and kind == "cover" else ""
+    if fmt == "story":
+        where, lz = "meio", ("base" if _n[0] % 2 else "topo")
+    elif kind == "cover":
+        where, lz = CAPAS[_n[0] % len(CAPAS)]
     elif kind == "tabela":
-        body += f'<div class="toplogo"><img src="{LOGO_URI}" style="width:260px"></div>{inner}'
+        where, lz = "topo", None
     else:
-        body += f'<div class="count">{pg}</div>{streak(P["GLOWB"] - 20, .35, "M-60 320 Q560 200 1140 300")}{inner}'
-        body += (f'<div class="slogan"><img src="{LOGO_URI}"><span>APPLE AO SEU ALCANCE.</span></div>' if kind == "last"
-                 else f'<div class="botlogo"><img src="{LOGO_URI}"></div>')
-    return f'<html><head><meta charset="utf-8"><style>{CSS % P}</style></head><body>{body}</body></html>'
+        i = int(pg.split("/")[0]) if pg else 0
+        where, lz = ("topo", "base") if kind == "last" else DENTRO[i % len(DENTRO)]
+    _n[0] += 1
+    inner = inner.replace("<!--EB-->", eb)
+    if kind == "tabela":
+        blk = f'<div class="blk" style="top:220px">{inner}</div>'
+    else:
+        blk = f'<div class="blk" style="{_pos(where, H)}">{inner}</div>'
+    cnt = f'<div class="count">{pg}</div>' if pg and kind != "cover" else ""
+    glow = brilho() if (fmt == "feed" and badge and "1 ANO" in badge.upper() and kind == "cover") else luz(lz, H, .5 if kind == "inner" else .9)
+    return (f'<html><head><meta charset="utf-8"><style>{CSS % P}</style></head><body>{glow}'
+            f'<div class="logo"><img src="{LOGO_URI}"></div>{cnt}{blk}</body></html>')
 
 
-def _cover(h1, sub="", cta="", huge=False):
-    s = f'<p class="sub">{sub}</p>' if sub else ""
+def _cover(h1, sub="", cta=""):
+    s = f'<p class="bd">{sub}</p>' if sub else ""
     c = ""
     if cta:
         plain = cta.replace("&rarr;", "").strip()
         c = f'<p class="tap">{plain}</p>' if plain.isupper() else f'<p class="cta">{cta}</p>'
-    cls = ' class="huge"' if huge else ""
-    return f'<div class="cover"><h1{cls}>{titulo(h1)}</h1>{s}{c}</div>'
+    return f'<!--EB--><h1>{titulo(h1)}</h1>{s}{c}'
 
 
 def one(h1, sub="", cta="", cls="h1xl"):
@@ -142,32 +168,30 @@ def hero(h1, sub="", cta="", cls="h1xl", mt=150):
 
 
 def item(num, title, body, note):
-    word = " word" if not num.isdigit() or len(num) > 2 else ""
-    return (f'<div class="inner"><div class="num{word}">{num}</div><h1>{titulo(title)}</h1>'
-            f'<p class="body">{body}</p><p class="note">{note}</p></div>')
+    return (f'<div class="eb g">{num}</div><h1>{titulo(title)}</h1>'
+            f'<p class="bd w">{body}</p><p class="note">{note}</p>')
 
 
 def lista(h1, items, cta="", mt=110):
     rows = "".join(f"<div>{x}</div>" for x in items)
     c = f'<p class="cta">{cta}</p>' if cta else ""
-    return f'<div class="inner"><h1 class="first">{titulo(h1)}</h1><div class="rows">{rows}</div>{c}</div>'
+    return f'<h1 class="first">{titulo(h1)}</h1><div class="rows">{rows}</div>{c}<div class="slogan">APPLE AO SEU ALCANCE.</div>'
 
 
 def modelo(m, g, b, c, de, por):
-    return (f'<div class="inner model"><h1>{m}</h1><div class="spec">{g} &nbsp;·&nbsp; Bateria {b}</div>'
+    return (f'<div class="eb">Vitrine 1 ano</div><h1>{m}</h1><div class="spec">{g} · Bateria {b}</div>'
             f'<div class="cores">{c}</div><div class="de">De <s>{brl(de)}</s> por</div>'
             f'<div class="por">{brl(por)}</div><div class="off">R$ 300 OFF</div>'
-            f'<div class="perks">8 meses de garantia<br>Capa + película de brinde</div></div>')
+            f'<div class="perks">8 meses de garantia<br>Capa + película de brinde</div>')
 
 
 def tabela():
     rows = "".join(
         f'<tr><td class="m">{m}</td><td>{g}</td><td>{b}</td><td class="d"><s>{brl(de)}</s></td><td class="p">{brl(por)}</td></tr>'
         for m, g, b, c, de, por in VITRINE)
-    return (f'<div class="inner" style="top:200px"><h1 class="first" style="font-size:60px">Vitrine 1 ano'
-            f'<span class="tail">R$ 300 OFF em qualquer iPhone</span></h1>'
+    return (f'<div class="eb">Vitrine 1 ano</div><h1 style="font-size:60px">R$ 300 OFF em qualquer iPhone</h1>'
             f'<table><tr><th>MODELO</th><th>ARMAZ.</th><th>BATERIA</th><th class="r">DE</th><th class="r">POR</th></tr>{rows}</table>'
-            f'<p class="note" style="margin-top:22px;font-size:24px">8 meses de garantia e capa + película de brinde em toda compra. Até 30/11.</p></div>')
+            f'<p class="note" style="font-size:24px">8 meses de garantia e capa + película de brinde em toda compra. Até 30/11.</p>')
 
 
 # ---------------------------------------------------------------- peças
@@ -284,6 +308,13 @@ def build():
         page(one('Obrigado pelo <span class="g">primeiro ano.</span>', "Foram 12 meses e uma semana de aniversário que só aconteceram por causa de você. O ano 2 começa agora."), "feed"))
     add("2026-12-01", "foni_story_12h_1ano_obrigado.jpg", "story",
         page(one('Obrigado pelo <span class="g">primeiro ano.</span>', "O ano 2 começa agora."), "story"))
+    # 01/12 story do reel de AirPods (antes sem gerador)
+    add("2026-12-01", "foni_story_18h_airpods.jpg", "story",
+        page(hero('Seus AirPods <span class="g">traduzem conversas ao vivo.</span>', "Veja 3 funções que pouca gente usa.",
+                  "TOQUE NO PERFIL PARA VER &rarr;"), "story", badge="NOVO REEL"))
+    # a pergunta do primeiro iPhone foi para 20/11
+    add("2026-11-20", "foni_story_1ano_primeiro_iphone.jpg", "story",
+        page(hero('Qual foi o seu <span class="g">primeiro iPhone?</span>', "Responda na caixinha. As melhores respostas a gente reposta."), "story", badge="1 ANO DE FONI BR"))
     return P
 
 
