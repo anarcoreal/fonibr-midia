@@ -42,7 +42,7 @@ Hashtags padrão (opcional): #FoniBR #iPhone #Apple
 > MacBook Air ou MacBook Pro? Depende do que você vai fazer. Três diferenças que importam na escolha. Ficou na dúvida? Chame no direct.
 
 **12h — `foni_12h_apple_watch_01` a `_05.jpg`**
-> O Apple Watch pode pedir ajuda por você. Detecção de Queda, SOS de Emergência e alertas do coração: veja como ativar.
+> O Apple Watch pode pedir ajuda por você. Detecção de Queda, SOS de Emergência e alertas do coração: veja como ativar. Siga @fonibroficial para mais.
 
 ## 23/11 (seg)
 
