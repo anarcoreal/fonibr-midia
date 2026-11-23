@@ -14,6 +14,15 @@ WA = "CHAME NO WHATSAPP, LINK DA BIO &rarr;"
 ESPACO = '<div style="height:330px"></div>'  # área livre para a figurinha de enquete
 
 P = []  # (data, arquivo, fmt, html)
+MEIO = 'class="blk" style="top:50%;transform:translateY(-50%)"'
+POS = {"alto": 'class="blk" style="top:470px"', "baixo": 'class="blk" style="bottom:470px"', "meio": MEIO}
+BIG = ("<style>.rows div{font-size:44px;padding:28px 0}.bd{font-size:40px}.cta{font-size:40px}"
+       ".por{font-size:220px}.de{margin-top:40px}.spec{font-size:40px}.cores{font-size:32px}.perks{font-size:34px}</style>")
+
+
+def st(html, pos="meio"):
+    """Story com bloco em altura variada e texto maior (legível em 5 s)."""
+    return html.replace(MEIO, POS[pos]).replace("</head>", BIG + "</head>")
 
 
 def add(d, nome, fmt, html):
@@ -24,7 +33,7 @@ def produto(m, g, b, cores, preco, extra=""):
     return (f'<div class="eb">Seminovo do dia</div><h1>{m}</h1><div class="spec">{g} · Bateria {b}</div>'
             f'<div class="cores">{cores}</div>' + (f'<div class="cores">{extra}</div>' if extra else "") + '<div class="de">À vista</div>'
             f'<div class="por">{brl(preco)}</div>'
-            f'<div class="perks">8 meses de garantia<br>Dia 27: R$ 300 OFF em qualquer iPhone</div>'
+            f'<div class="perks">8 meses de garantia · Dia 27: R$ 300 OFF</div>'
             f'<p class="tap">{WA}</p>')
 
 
@@ -35,50 +44,48 @@ add("2026-11-23", "foni_12h_1ano_revelacao_05.jpg", "feed",
                 "A lista VIP recebe a vitrine na noite de 26/11"],
                "Vitrine aberta dia 27, às 07h43."), "feed", pg="05/05"))
 add("2026-11-23", "foni_story_18h_loja_de_verdade.jpg", "story",
-    page(lista(f'Loja de verdade. {G("Pode conferir.")}',
-               ["FONI BR LTDA · CNPJ 69.207.688/0001-81", "Página no Reclame Aqui",
-                "8 meses de garantia nos seminovos", "Envio para todo o Brasil"], "Chame no WhatsApp, link da bio."),
-         "story", kind="inner"))
+    st(page(lista(f'Loja de verdade. {G("Pode conferir.")}',
+               ["CNPJ 69.207.688/0001-81", "Estamos no Reclame Aqui", "8 meses de garantia nos seminovos"]),
+         "story", kind="inner"), "alto"))
 
 # ---------------------------------------------------------------- 24/11
 add("2026-11-24", "foni_story_0743_produto_iphone14promax.jpg", "story",
-    page(produto("iPhone 14 Pro Max", "128 GB", "90%", "Dourado e Branco", 3900,
-                 "Também 256 GB em Preto e Roxo: R$ 4.120"), "story", kind="inner"))
+    st(page(produto("iPhone 14 Pro Max", "128 GB", "90%", "Dourado e Branco", 3900,
+                 "Também 256 GB em Preto e Roxo: R$ 4.120"), "story", kind="inner"), "baixo"))
 add("2026-11-24", "foni_story_12h_curiosidade_app_store.jpg", "story",
-    page(hero(f'A App Store abriu {G("com 500 apps.")}',
-              "Foi em julho de 2008. Hoje são milhões, e o seu iPhone baixa todos eles."), "story", badge="CURIOSIDADE"))
+    st(page(hero(f'A App Store abriu {G("com 500 apps.")}',
+              "Foi em 10 de julho de 2008. Hoje a loja é parte do dia a dia de qualquer iPhone."), "story", badge="CURIOSIDADE"), "alto"))
 add("2026-11-24", "foni_story_18h_enquete_14promax_15.jpg", "story",
-    page(hero(f'14 Pro Max {G("ou 15?")}', "Vote na enquete. Dia 27 os dois saem com R$ 300 OFF.") + ESPACO,
-         "story", badge="ENQUETE"))
+    st(page(hero(f'14 Pro Max {G("ou 15?")}', "Vote abaixo. Dia 27 os dois saem com R$ 300 OFF.") + ESPACO,
+         "story", badge="ENQUETE"), "alto"))
 
 # ---------------------------------------------------------------- 25/11
 add("2026-11-25", "foni_story_0743_produto_iphone15promax.jpg", "story",
-    page(produto("iPhone 15 Pro Max", "256 GB", "90%+", "Titânio Natural", 4700), "story", kind="inner"))
+    st(page(produto("iPhone 15 Pro Max", "256 GB", "90%+", "Titânio Natural", 4700), "story", kind="inner"), "meio"))
 add("2026-11-25", "foni_story_18h_como_comprar.jpg", "story",
-    page(lista(f'Como comprar {G("na Foni BR")}',
-               ["01 · Chame no WhatsApp, link da bio", "02 · Escolha modelo, cor e armazenamento",
-                "03 · Pague e receba o termo de garantia digital", "04 · Receba em casa, com envio para todo o Brasil"],
-               "Dúvida? É só chamar."), "story", kind="inner"))
+    st(page(lista(f'Como comprar {G("na Foni BR")}',
+               ["1. Chame no WhatsApp", "2. Escolha o seu iPhone", "3. Receba em todo o Brasil"],
+               "Link na bio."), "story", kind="inner"), "baixo"))
 
 # ---------------------------------------------------------------- 26/11
 add("2026-11-26", "foni_story_0743_produto_iphone16pro.jpg", "story",
-    page(produto("iPhone 16 Pro", "128 GB", "89%+", "Titânio Deserto e Natural", 4820,
-                 "Também 256 GB, bateria 100%: R$ 5.120"), "story", kind="inner"))
+    st(page(produto("iPhone 16 Pro", "128 GB", "89%+", "Titânio Deserto e Natural", 4820,
+                 "Também 256 GB, bateria 100%: R$ 5.120"), "story", kind="inner"), "alto"))
 add("2026-11-26", "foni_story_12h_curiosidade_magsafe.jpg", "story",
-    page(hero(f'O MagSafe {G("nasceu no MacBook.")}',
-              "Estreou no MacBook Pro em 2006 e voltou no iPhone 12, em 2020, para carregadores e acessórios magnéticos."),
-         "story", badge="CURIOSIDADE"))
+    st(page(hero(f'O MagSafe {G("nasceu no MacBook.")}',
+              "Estreou no MacBook Pro em 2006 e voltou no iPhone 12, em 2020."),
+         "story", badge="CURIOSIDADE"), "baixo"))
 
 # ---------------------------------------------------------------- 27/11
-add("2026-11-27", "foni_story_12h_1ano_tabela.jpg", "story", page(tabela(), "story", kind="tabela").replace('class="blk" style="top:220px"', 'class="blk" style="top:420px"'))
-n = len(VITRINE) + 3
+add("2026-11-27", "foni_story_12h_1ano_tabela.jpg", "story",
+    st(page(lista(f'Seminovos a partir de {G("R$ 1.970")}',
+                  ["iPhone 13 · R$ 2.330", "iPhone 14 Pro · R$ 3.290", "iPhone 15 Pro Max · R$ 4.400", "iPhone 16 Pro Max · R$ 5.270"],
+                  "16 modelos com R$ 300 OFF. Veja todos no post."), "story", kind="inner"), "meio"))
+n = len(VITRINE) + 2
 vit = [page(one(f'A vitrine {G("abriu.")}', "Hoje a Foni BR faz um ano e o presente é seu. R$ 300 OFF em qualquer iPhone."),
             "feed", badge="1 ANO", pg=f"01/{n:02d}", swipe=True)]
 for i, r in enumerate(VITRINE, 2):
     vit.append(page(modelo(*r), "feed", badge="VITRINE 1 ANO", pg=f"{i:02d}/{n:02d}"))
-vit.append(page(lista(f'iPhones novos {G("também.")}',
-                      ["Lacrados, a partir do iPhone 16", "R$ 300 OFF em qualquer modelo", "Consulte cores e preços"],
-                      "Chame no WhatsApp, link da bio."), "feed", pg=f"{n-1:02d}/{n:02d}"))
 vit.append(page(lista(f'Até 30/11 ou {G("enquanto durar.")}',
                       ["R$ 300 OFF em qualquer iPhone", "8 meses de garantia nos seminovos", "Capa + película de brinde",
                        "Cupom FONI1ANO no fonibr.com.br"], "Chame no WhatsApp, link da bio."), "feed", pg=f"{n:02d}/{n:02d}"))
@@ -87,17 +94,17 @@ for i, h in enumerate(vit, 1):
 
 # ---------------------------------------------------------------- 28/11
 add("2026-11-28", "foni_story_12h_1ano_upgrade.jpg", "story",
-    page(hero(f'Seu iPhone antigo {G("vira crédito.")}', "Troque pelo Foni Upgrade. Modelo novo com R$ 300 OFF até 30/11.", WA),
-         "story", badge="FONI UPGRADE"))
+    st(page(hero(f'Seu iPhone antigo {G("vira crédito.")}', "Troque pelo Foni Upgrade. Modelo novo com R$ 300 OFF até 30/11.", WA),
+         "story", badge="FONI UPGRADE"), "alto"))
 add("2026-11-28", "foni_story_18h_enquete_garantiu.jpg", "story",
-    page(hero(f'Já garantiu {G("o seu?")}', "R$ 300 OFF em qualquer iPhone até 30/11.") + ESPACO, "story", badge="ENQUETE"))
+    st(page(hero(f'Já garantiu {G("o seu?")}', "R$ 300 OFF em qualquer iPhone até 30/11.") + ESPACO, "story", badge="ENQUETE"), "alto"))
 
 # ---------------------------------------------------------------- 29/11
 add("2026-11-29", "foni_story_12h_1ano_ate_amanha.jpg", "story",
-    page(hero(f'Só até {G("amanhã.")}', "R$ 300 OFF em qualquer iPhone, capa + película de brinde e cupom FONI1ANO.", WA), "story"))
+    st(page(hero(f'Só até {G("amanhã.")}', "R$ 300 OFF em qualquer iPhone e capa + película de brinde.", WA), "story"), "baixo"))
 add("2026-11-29", "foni_story_12h_reel_ultimos_dias.jpg", "story",
-    page(hero(f'Últimos dias {G("da vitrine.")}', "R$ 300 OFF em qualquer iPhone até 30/11.", "TOQUE NO PERFIL PARA VER &rarr;"),
-         "story", badge="NOVO REEL"))
+    st(page(hero(f'Últimos dias {G("da vitrine.")}', "R$ 300 OFF em qualquer iPhone até 30/11.", "TOQUE NO PERFIL PARA VER &rarr;"),
+         "story", badge="NOVO REEL"), "meio"))
 
 
 def reel_ultimos():
