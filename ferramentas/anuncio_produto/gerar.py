@@ -69,7 +69,7 @@ body{{width:1080px;height:{H}px;background:#000;color:#F5F5F7;font-family:'Inter
 .glow{{position:absolute;left:0;top:0}}
 .logo{{position:absolute;top:120px;left:0;right:0}} .logo img{{width:360px}}
 .top{{position:absolute;top:235px;left:0;right:0}}
-h1{{font-size:150px;font-weight:700;letter-spacing:-5px}}
+h1{{font-size:150px;font-weight:700;letter-spacing:-5px;white-space:nowrap;display:inline-block;height:182px;line-height:182px}}
 .eb{{font-size:40px;font-weight:600;color:#2FD35A;margin-top:4px}}
 .specs{{display:flex;justify-content:center;margin-top:26px}}
 .spec{{padding:0 54px}} .spec+.spec{{border-left:1.5px solid #3A3A3C}}
@@ -88,12 +88,13 @@ h1{{font-size:150px;font-weight:700;letter-spacing:-5px}}
 </style></head><body>
 {palco}
 <div class="logo"><img src="{LOGO_URI}"></div>
-<div class="top"><h1>{modelo}</h1><div class="eb">{cond}</div><div class="specs"><div class="spec"><b>{memoria}</b><span>Armazenamento</span></div><div class="spec"><b>{bateria}</b><span>{rotulo2}</span></div></div></div>
+<div class="top"><h1>{modelo}</h1><br><div class="eb">{cond}</div><div class="specs"><div class="spec"><b>{memoria}</b><span>Armazenamento</span></div><div class="spec"><b>{bateria}</b><span>{rotulo2}</span></div></div></div>
 <img class="foto" src="{foto_uri}">
 <div class="base"><div class="de">{de}</div><div class="preco">{brl(preco)}</div>
 <div class="cores">{chips(cores)}</div>{gar_div}
 <div class="cta">Chame no WhatsApp</div></div>
 {promo_div}
+<script>var h=document.querySelector('h1');var w=h.scrollWidth;if(w>960){{h.style.fontSize=(150*960/w)+'px';h.style.letterSpacing=(-5*960/w)+'px'}}</script>
 </body></html>"""
 
 
