@@ -62,7 +62,7 @@ def chips(cores):
 
 TAMANHOS = {  # (altura da foto, topo da foto, topo do bloco de preço, topo do título, topo da promo). Pro Max maior que o Pro, para mostrar a tela maior
     "normal": (620, 660, 1345, 235, 1760), "pro": (700, 625, 1365, 235, 1760), "promax": (840, 562, 1440, 200, 1805),
-    "mac": (600, 680, 1345, 235, 1760)}  # notebook: foto deitada, limitada pela largura
+    "mac": (600, 680, 1345, 235, 1760), "mac_grande": (720, 615, 1380, 235, 1790)}  # notebook: foto deitada, limitada pela largura
 
 
 def html(modelo, cond, memoria, bateria, preco, cores, foto_uri, promo, garantia, rotulo2="Saúde da bateria", de="À vista", tamanho="normal", specs=None):
