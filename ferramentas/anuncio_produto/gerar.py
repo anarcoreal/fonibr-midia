@@ -29,7 +29,7 @@ H = 1920
 CORES = {"preto": "#2b2b2e", "branco": "#f2f1ec", "white": "#f2f1ec", "rosa": "#f4b8c8", "azul": "#a9c1dd",
          "verde": "#b9d9c3", "lilás": "#cbb9e2", "lavender": "#cbb9e2", "amarelo": "#f3e08a", "vermelho": "#d0202e",
          "dourado": "#e9d4a9", "prata": "#e3e4e5", "silver": "#e3e4e5", "roxo": "#5d4b70", "laranja": "#f08a3c",
-         "titânio natural": "#bab4a9", "titânio deserto": "#c9b49b", "glacier": "#dfe8ee", "burgundy": "#6e1f2b"}
+         "lavanda": "#cbb9e2", "titânio natural": "#bab4a9", "titânio deserto": "#c9b49b", "glacier": "#dfe8ee", "burgundy": "#6e1f2b"}
 FOTO_ALT = 620  # altura do aparelho na arte (px)
 
 
@@ -55,7 +55,7 @@ def chips(cores):
     return "".join(f'<span class="chip"><i style="background:{CORES.get(n.lower(), "#8e8e93")}"></i>{n}</span>' for n in nomes)
 
 
-def html(modelo, cond, memoria, bateria, preco, cores, foto_uri, promo, garantia):
+def html(modelo, cond, memoria, bateria, preco, cores, foto_uri, promo, garantia, rotulo2="Saúde da bateria", de="À vista"):
     gar_div = f'<div class="gar">{garantia}</div>' if garantia else ""
     palco = luz("base", H, .9).replace(f"M-60 {H-200} Q540 {H-340} 1140 {H-260}", "M-60 1370 Q540 1250 1140 1310")
     promo_div = f'<div class="promo">{promo}</div>' if promo else ""
@@ -84,9 +84,9 @@ h1{{font-size:150px;font-weight:700;letter-spacing:-5px}}
 </style></head><body>
 {palco}
 <div class="logo"><img src="{LOGO_URI}"></div>
-<div class="top"><h1>{modelo}</h1><div class="eb">{cond}</div><div class="specs"><div class="spec"><b>{memoria}</b><span>Armazenamento</span></div><div class="spec"><b>{bateria}</b><span>Saúde da bateria</span></div></div></div>
+<div class="top"><h1>{modelo}</h1><div class="eb">{cond}</div><div class="specs"><div class="spec"><b>{memoria}</b><span>Armazenamento</span></div><div class="spec"><b>{bateria}</b><span>{rotulo2}</span></div></div></div>
 <img class="foto" src="{foto_uri}">
-<div class="base"><div class="de">À vista</div><div class="preco">{brl(preco)}</div>
+<div class="base"><div class="de">{de}</div><div class="preco">{brl(preco)}</div>
 <div class="cores">{chips(cores)}</div>{gar_div}
 <div class="cta">Chame no WhatsApp</div></div>
 {promo_div}
@@ -110,6 +110,8 @@ def main():
     ap.add_argument("--cond", default="Seminovo")
     ap.add_argument("--memoria", required=True, help='ex.: "128 GB"')
     ap.add_argument("--bateria", required=True, help='ex.: "100%%" ou "87%%+"')
+    ap.add_argument("--rotulo2", default="Saúde da bateria", help='novo lacrado: --bateria "Lacrado" --rotulo2 "Condição"')
+    ap.add_argument("--de", default="À vista", help='preço varia por cor: "À vista, a partir de"')
     ap.add_argument("--preco", type=float, required=True)
     ap.add_argument("--cores", required=True, help='use "ou": "Preto ou Azul"')
     ap.add_argument("--garantia", default="8 meses de garantia")
@@ -117,7 +119,7 @@ def main():
     ap.add_argument("--foto", required=True)
     ap.add_argument("--saida", required=True)
     a = ap.parse_args()
-    asyncio.run(render(html(a.modelo, a.cond, a.memoria, a.bateria, a.preco, a.cores, preparar_foto(a.foto), a.promo, a.garantia), a.saida))
+    asyncio.run(render(html(a.modelo, a.cond, a.memoria, a.bateria, a.preco, a.cores, preparar_foto(a.foto), a.promo, a.garantia, a.rotulo2, a.de), a.saida))
     print(a.saida)
 
 
