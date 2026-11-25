@@ -48,3 +48,10 @@ def gerar(data, nome, ficha, durante):
 if __name__ == "__main__":
     for g in GRADE:
         gerar(*g)
+
+# As tarefas agendadas de 26 a 29/11 publicam pelos nomes ANTIGOS (não dá para mudar o texto delas desta conversa).
+# Por isso os arquivos antigos foram SOBRESCRITOS com as artes novas (25/11/2026):
+#   2026-11-26/foni_story_0743_produto_iphone16pro.jpg -> iPhone 14 (antes da campanha)
+#   2026-11-27/foni_story_1ano_modelo_01 -> iPhone 14 | _02 -> iPhone 15 | _05 -> iPhone 17
+#   2026-11-27/foni_story_1ano_modelo_11 -> 17 Pro Max | _13 -> 18 Pro Max | _16 -> 18 Pro
+#   2026-11-27/foni_story_1ano_modelo_06 (sai 28/11) -> 17 Pro | _12 (sai 29/11) -> iPhone 17
