@@ -61,11 +61,15 @@ def chips(cores):
 
 
 TAMANHOS = {  # (altura da foto, topo da foto, topo do bloco de preço, topo do título, topo da promo). Pro Max maior que o Pro, para mostrar a tela maior
-    "normal": (620, 660, 1345, 235, 1760), "pro": (700, 625, 1365, 235, 1760), "promax": (840, 562, 1440, 200, 1805)}
+    "normal": (620, 660, 1345, 235, 1760), "pro": (700, 625, 1365, 235, 1760), "promax": (840, 562, 1440, 200, 1805),
+    "mac": (600, 680, 1345, 235, 1760)}  # notebook: foto deitada, limitada pela largura
 
 
-def html(modelo, cond, memoria, bateria, preco, cores, foto_uri, promo, garantia, rotulo2="Saúde da bateria", de="À vista", tamanho="normal"):
+def html(modelo, cond, memoria, bateria, preco, cores, foto_uri, promo, garantia, rotulo2="Saúde da bateria", de="À vista", tamanho="normal", specs=None):
     falt, ftop, btop, ttop, ptop = TAMANHOS[tamanho]
+    pares = specs or [(memoria, "Armazenamento"), (bateria, rotulo2)]
+    blocos = "".join(f'<div class="spec"><b>{v}</b><span>{r}</span></div>' for v, r in pares)
+    preco_txt = brl(preco) if isinstance(preco, (int, float)) else preco
     gar_div = f'<div class="gar">{garantia}</div>' if garantia else ""
     palco = luz("base", H, .9).replace(f"M-60 {H-200} Q540 {H-340} 1140 {H-260}", "M-60 1370 Q540 1250 1140 1310")
     promo_div = f'<div class="promo">{promo}</div>' if promo else ""
@@ -94,9 +98,9 @@ h1{{font-size:150px;font-weight:700;letter-spacing:-5px;white-space:nowrap;displ
 </style></head><body>
 {palco}
 <div class="logo"><img src="{LOGO_URI}"></div>
-<div class="top"><h1>{modelo}</h1><br><div class="eb">{cond}</div><div class="specs"><div class="spec"><b>{memoria}</b><span>Armazenamento</span></div><div class="spec"><b>{bateria}</b><span>{rotulo2}</span></div></div></div>
+<div class="top"><h1>{modelo}</h1><br><div class="eb">{cond}</div><div class="specs">{blocos}</div></div>
 <img class="foto" src="{foto_uri}">
-<div class="base"><div class="de">{de}</div><div class="preco">{brl(preco)}</div>
+<div class="base"><div class="de">{de}</div><div class="preco">{preco_txt}</div>
 <div class="cores">{chips(cores)}</div>{gar_div}
 <div class="cta">Chame no WhatsApp</div></div>
 {promo_div}
@@ -119,11 +123,12 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--modelo", required=True)
     ap.add_argument("--cond", default="Seminovo")
-    ap.add_argument("--memoria", required=True, help='ex.: "128 GB"')
-    ap.add_argument("--bateria", required=True, help='ex.: "100%%" ou "87%%+"')
+    ap.add_argument("--memoria", default="", help='ex.: "128 GB"')
+    ap.add_argument("--bateria", default="", help='ex.: "100%%" ou "87%%+"')
+    ap.add_argument("--specs", default="", help='blocos livres "valor:rótulo|valor:rótulo" (ex.: Mac: "A18 Pro:Chip|8 GB:Memória|256 GB:SSD")')
     ap.add_argument("--rotulo2", default="Saúde da bateria", help='novo lacrado: --bateria "Lacrado" --rotulo2 "Condição"')
     ap.add_argument("--de", default="À vista", help='preço varia por cor: "À vista, a partir de"')
-    ap.add_argument("--preco", type=float, required=True)
+    ap.add_argument("--preco", required=True, help="número (ex.: 4300) ou texto")
     ap.add_argument("--cores", required=True, help='use "ou": "Preto ou Azul"')
     ap.add_argument("--garantia", default="8 meses de garantia")
     ap.add_argument("--promo", default="", help="linha discreta no rodapé (opcional)")
@@ -132,7 +137,12 @@ def main():
     ap.add_argument("--foto", required=True)
     ap.add_argument("--saida", required=True)
     a = ap.parse_args()
-    asyncio.run(render(html(a.modelo, a.cond, a.memoria, a.bateria, a.preco, a.cores, preparar_foto(a.foto, TAMANHOS[a.tamanho][0], a.esticar), a.promo, a.garantia, a.rotulo2, a.de, a.tamanho), a.saida))
+    try:
+        a.preco = float(a.preco)
+    except ValueError:
+        pass
+    asyncio.run(render(html(a.modelo, a.cond, a.memoria, a.bateria, a.preco, a.cores, preparar_foto(a.foto, TAMANHOS[a.tamanho][0], a.esticar), a.promo, a.garantia, a.rotulo2, a.de, a.tamanho,
+                             [tuple(x.split(":", 1)) for x in a.specs.split("|")] if a.specs else None), a.saida))
     print(a.saida)
 
 
