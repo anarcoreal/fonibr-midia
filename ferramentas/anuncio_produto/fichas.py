@@ -18,6 +18,8 @@ PENDENTE = "R$ ?.???"
 
 FICHAS = {
     # ---------------- iPhones seminovos
+    "iphone11": dict(modelo="iPhone 11", memoria="128 GB", bateria="100%", preco=2270,
+                     cores="Branco", promo=PROMO, tamanho="pro", foto="iphone-11/iphone11_branco.png"),
     "iphone14": dict(modelo="iPhone 14", memoria="128 GB", bateria="100%", preco=2850,
                      cores="Preto, Branco, Lilás ou Azul", promo=PROMO, foto="iphone-14/iphone14_preto.png"),
     "iphone15": dict(modelo="iPhone 15", memoria="128 GB", bateria="85%+", preco=3450,
