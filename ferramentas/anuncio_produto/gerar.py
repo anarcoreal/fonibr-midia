@@ -78,6 +78,8 @@ TAMANHOS = {  # (altura da foto, topo da foto, topo do bloco de preço, topo do 
 
 def html(modelo, cond, memoria, bateria, preco, cores, foto_uri, promo, garantia, rotulo2="Saúde da bateria", de="À vista", tamanho="normal", specs=None):
     falt, ftop, btop, ttop, ptop = TAMANHOS[tamanho]
+    # aparelho que passa da linha verde fica inteiro na frente dela (sem esmaecer a base, que parecia 'comida' pela linha)
+    mascara = "" if ftop + falt > 1290 else "-webkit-mask-image:linear-gradient(#000 88%,transparent)"
     pares = specs or [(memoria, "Armazenamento"), (bateria, rotulo2)]
     blocos = "".join(f'<div class="spec"><b>{v}</b><span>{r}</span></div>' for v, r in pares)
     preco_txt = brl(preco) if isinstance(preco, (int, float)) else preco
@@ -96,7 +98,7 @@ h1{{font-size:150px;font-weight:700;letter-spacing:-5px;white-space:nowrap;displ
 .spec{{padding:0 54px}} .spec+.spec{{border-left:1.5px solid #3A3A3C}}
 .spec b{{display:block;font-size:50px;font-weight:600;letter-spacing:-1px}}
 .spec span{{display:block;font-size:24px;color:#A1A1A6;margin-top:6px}}
-.foto{{position:absolute;top:{ftop}px;left:50%;transform:translateX(-50%);height:{falt}px;-webkit-mask-image:linear-gradient(#000 88%,transparent)}}
+.foto{{position:absolute;top:{ftop}px;left:50%;transform:translateX(-50%);height:{falt}px;{mascara}}}
 .base{{position:absolute;top:{btop}px;left:0;right:0}}
 .de{{font-size:30px;color:#A1A1A6}}
 .preco{{font-size:104px;font-weight:700;letter-spacing:-3px;margin-top:4px}}
