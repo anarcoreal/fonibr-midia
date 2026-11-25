@@ -1,4 +1,4 @@
-"""Anúncio de produto Foni BR — PADRÃO APROVADO em 25/11/2026 (estilo Apple).
+"""Anúncio de iPhone Foni BR — PADRÃO OFICIAL DE ANÚNCIOS DE IPHONES, definido em 25/11/2026 (estilo Apple).
 
 Story 1080x1920, tudo centralizado:
   logo grande no alto · nome do modelo gigante · condição em verde (Seminovo/Novo)
