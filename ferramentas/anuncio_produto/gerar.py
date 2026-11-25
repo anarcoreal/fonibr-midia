@@ -2,7 +2,7 @@
 
 Story 1080x1920, tudo centralizado:
   logo grande no alto · nome do modelo gigante · condição em verde (Seminovo/Novo)
-  · specs em cinza · UM aparelho grande no centro · linha verde como "palco" sob o aparelho
+  · armazenamento e saúde da bateria em dois blocos (valor + rótulo) · UM aparelho grande no centro · linha verde como "palco" sob o aparelho
   · "À vista" + preço forte · bolinhas de cor com o nome · garantia em linha própria · botão verde "Chame no WhatsApp"
   · promoção discreta no rodapé. Sem ponto final nas frases. Rodapé livre (campo de resposta do story).
 
@@ -11,7 +11,7 @@ transparência (o aparelho mantém as cores originais) e a ampliação é feita 
 Nunca escurecer a foto inteira para "pretear" o fundo: isso mata a qualidade do aparelho.
 
 Uso:
-  python3 gerar.py --modelo "iPhone 14" --spec "128 GB e bateria 100%" --preco 2850 \
+  python3 gerar.py --modelo "iPhone 14" --memoria "128 GB" --bateria "100%" --preco 2850 \
       --cores "Preto, Branco, Lilás ou Azul" --foto ../../produtos/iphone-14/iphone14_preto.png \
       --saida ../../posts/AAAA-MM-DD/foni_story_produto_iphone14.jpg
 Preço, cores e bateria: sempre de estoque/precos.md (não inventar).
@@ -30,7 +30,7 @@ CORES = {"preto": "#2b2b2e", "branco": "#f2f1ec", "white": "#f2f1ec", "rosa": "#
          "verde": "#b9d9c3", "lilás": "#cbb9e2", "lavender": "#cbb9e2", "amarelo": "#f3e08a", "vermelho": "#d0202e",
          "dourado": "#e9d4a9", "prata": "#e3e4e5", "silver": "#e3e4e5", "roxo": "#5d4b70", "laranja": "#f08a3c",
          "titânio natural": "#bab4a9", "titânio deserto": "#c9b49b", "glacier": "#dfe8ee", "burgundy": "#6e1f2b"}
-FOTO_ALT = 660  # altura do aparelho na arte (px)
+FOTO_ALT = 620  # altura do aparelho na arte (px)
 
 
 def preparar_foto(caminho, altura=FOTO_ALT):
@@ -55,7 +55,7 @@ def chips(cores):
     return "".join(f'<span class="chip"><i style="background:{CORES.get(n.lower(), "#8e8e93")}"></i>{n}</span>' for n in nomes)
 
 
-def html(modelo, cond, spec, preco, cores, foto_uri, promo, garantia):
+def html(modelo, cond, memoria, bateria, preco, cores, foto_uri, promo, garantia):
     gar_div = f'<div class="gar">{garantia}</div>' if garantia else ""
     palco = luz("base", H, .9).replace(f"M-60 {H-200} Q540 {H-340} 1140 {H-260}", "M-60 1370 Q540 1250 1140 1310")
     promo_div = f'<div class="promo">{promo}</div>' if promo else ""
@@ -64,11 +64,14 @@ def html(modelo, cond, spec, preco, cores, foto_uri, promo, garantia):
 body{{width:1080px;height:{H}px;background:#000;color:#F5F5F7;font-family:'Inter',sans-serif;overflow:hidden;position:relative;-webkit-font-smoothing:antialiased;text-align:center}}
 .glow{{position:absolute;left:0;top:0}}
 .logo{{position:absolute;top:120px;left:0;right:0}} .logo img{{width:360px}}
-.top{{position:absolute;top:255px;left:0;right:0}}
+.top{{position:absolute;top:235px;left:0;right:0}}
 h1{{font-size:150px;font-weight:700;letter-spacing:-5px}}
 .eb{{font-size:40px;font-weight:600;color:#2FD35A;margin-top:4px}}
-.sub{{font-size:40px;font-weight:500;color:#A1A1A6;margin-top:8px}}
-.foto{{position:absolute;top:620px;left:50%;transform:translateX(-50%);height:{FOTO_ALT}px;-webkit-mask-image:linear-gradient(#000 88%,transparent)}}
+.specs{{display:flex;justify-content:center;margin-top:26px}}
+.spec{{padding:0 54px}} .spec+.spec{{border-left:1.5px solid #3A3A3C}}
+.spec b{{display:block;font-size:50px;font-weight:600;letter-spacing:-1px}}
+.spec span{{display:block;font-size:24px;color:#A1A1A6;margin-top:6px}}
+.foto{{position:absolute;top:660px;left:50%;transform:translateX(-50%);height:{FOTO_ALT}px;-webkit-mask-image:linear-gradient(#000 88%,transparent)}}
 .base{{position:absolute;top:1345px;left:0;right:0}}
 .de{{font-size:30px;color:#A1A1A6}}
 .preco{{font-size:104px;font-weight:700;letter-spacing:-3px;margin-top:4px}}
@@ -81,7 +84,7 @@ h1{{font-size:150px;font-weight:700;letter-spacing:-5px}}
 </style></head><body>
 {palco}
 <div class="logo"><img src="{LOGO_URI}"></div>
-<div class="top"><h1>{modelo}</h1><div class="eb">{cond}</div><div class="sub">{spec}</div></div>
+<div class="top"><h1>{modelo}</h1><div class="eb">{cond}</div><div class="specs"><div class="spec"><b>{memoria}</b><span>Armazenamento</span></div><div class="spec"><b>{bateria}</b><span>Saúde da bateria</span></div></div></div>
 <img class="foto" src="{foto_uri}">
 <div class="base"><div class="de">À vista</div><div class="preco">{brl(preco)}</div>
 <div class="cores">{chips(cores)}</div>{gar_div}
@@ -105,7 +108,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--modelo", required=True)
     ap.add_argument("--cond", default="Seminovo")
-    ap.add_argument("--spec", required=True, help='ex.: "128 GB e bateria 100%%"')
+    ap.add_argument("--memoria", required=True, help='ex.: "128 GB"')
+    ap.add_argument("--bateria", required=True, help='ex.: "100%%" ou "87%%+"')
     ap.add_argument("--preco", type=float, required=True)
     ap.add_argument("--cores", required=True, help='use "ou": "Preto ou Azul"')
     ap.add_argument("--garantia", default="8 meses de garantia")
@@ -113,7 +117,7 @@ def main():
     ap.add_argument("--foto", required=True)
     ap.add_argument("--saida", required=True)
     a = ap.parse_args()
-    asyncio.run(render(html(a.modelo, a.cond, a.spec, a.preco, a.cores, preparar_foto(a.foto), a.promo, a.garantia), a.saida))
+    asyncio.run(render(html(a.modelo, a.cond, a.memoria, a.bateria, a.preco, a.cores, preparar_foto(a.foto), a.promo, a.garantia), a.saida))
     print(a.saida)
 
 
