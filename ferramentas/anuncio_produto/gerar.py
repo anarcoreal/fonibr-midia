@@ -33,7 +33,7 @@ CORES = {"preto": "#2b2b2e", "branco": "#f2f1ec", "white": "#f2f1ec", "rosa": "#
 FOTO_ALT = 620  # altura do aparelho na arte (px)
 
 
-def preparar_foto(caminho, altura=FOTO_ALT, esticar=1.0, esfumar=False):
+def preparar_foto(caminho, altura=FOTO_ALT, esticar=1.0, esfumar=False, limiar=0):
     """Fundo -> transparente (pela cor do canto), aparelho intacto, ampliação Lanczos + nitidez leve."""
     a = np.asarray(Image.open(caminho).convert("RGB")).astype(float)
     cantos = np.concatenate([a[:8, :8].reshape(-1, 3), a[:8, -8:].reshape(-1, 3)])
@@ -45,6 +45,9 @@ def preparar_foto(caminho, altura=FOTO_ALT, esticar=1.0, esfumar=False):
     rx = np.clip(np.minimum(np.arange(w), np.arange(w)[::-1]) / (0.06 * w), 0, 1)
     if esfumar:
         alpha = alpha * np.minimum.outer(ry, rx)
+    if limiar:  # fundo em degradê cinza: pixels escuros e sem cor viram transparentes (some a "caixa")
+        luma = a.mean(2); sat = a.max(2) - a.min(2)
+        alpha = np.minimum(alpha, np.maximum(np.clip((luma - limiar) / 18, 0, 1), np.clip((sat - 12) / 10, 0, 1)))
     im = Image.fromarray(a.astype("uint8")).convert("RGBA")
     im.putalpha(Image.fromarray((alpha * 255).astype("uint8")).filter(ImageFilter.GaussianBlur(0.6)))
     # esticar > 1 corrige foto com aparelho "atarracado" (largura proporcionalmente maior que a do iPhone real)
@@ -142,6 +145,7 @@ def main():
     ap.add_argument("--tamanho", default="normal", choices=list(TAMANHOS), help="pro / promax: foto menor / maior")
     ap.add_argument("--esticar", type=float, default=1.0, help="proporção vertical da foto (ex.: 1.08)")
     ap.add_argument("--esfumar", action="store_true", help="esfuma as bordas da foto (fundo em degradê)")
+    ap.add_argument("--limiar", type=float, default=0, help="remove fundo cinza escuro até esse brilho (ex.: 40)")
     ap.add_argument("--foto", required=True)
     ap.add_argument("--saida", required=True)
     a = ap.parse_args()
@@ -149,7 +153,7 @@ def main():
         a.preco = float(a.preco)
     except ValueError:
         pass
-    asyncio.run(render(html(a.modelo, a.cond, a.memoria, a.bateria, a.preco, a.cores, preparar_foto(a.foto, TAMANHOS[a.tamanho][0], a.esticar, a.esfumar), a.promo, a.garantia, a.rotulo2, a.de, a.tamanho,
+    asyncio.run(render(html(a.modelo, a.cond, a.memoria, a.bateria, a.preco, a.cores, preparar_foto(a.foto, TAMANHOS[a.tamanho][0], a.esticar, a.esfumar, a.limiar), a.promo, a.garantia, a.rotulo2, a.de, a.tamanho,
                              [tuple(x.split(":", 1)) for x in a.specs.split("|")] if a.specs else None), a.saida))
     print(a.saida)
 
