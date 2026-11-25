@@ -56,7 +56,7 @@ FICHAS = {
     "fonte_usbc": dict(modelo="Fonte USB-C", cond="Carregador de tomada", specs="USB-C:Saída",
                        preco=PENDENTE, cores="Branco", garantia="", tamanho="pro",
                        foto="fonte-cabo-usbc/fonte_usbc.png"),
-    "cabo_usbc": dict(modelo="Cabo USB-C", cond="Para iPhone 15 em diante", specs="USB-C para USB-C:Conectores",
+    "cabo_usbc": dict(modelo="Cabo USB-C", cond="", specs="USB-C para USB-C:Conectores",
                       preco=PENDENTE, cores="Branco", garantia="", tamanho="pro",
                       foto="fonte-cabo-usbc/cabo_usbc.png"),
 }
