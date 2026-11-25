@@ -1,0 +1,1 @@
+Apple Watch Series 12, 46 mm, GPS. Anuncio: um relogio so com --tamanho pro --esfumar; cores como opcoes embaixo. Os relogios se sobrepoem na foto original: so os das pontas tem recorte limpo (cinza e bronze).
