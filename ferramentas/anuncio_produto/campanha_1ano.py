@@ -13,7 +13,7 @@ import subprocess
 
 POSTS = os.path.join(AQUI, "..", "..", "posts")
 OFF = 300
-ANTES = "Dia 27: R$ 300 OFF em qualquer iPhone"
+ANTES = "Amanhã tem R$ 300 OFF em qualquer iPhone"
 DURANTE = "Até 30/11 ou enquanto durar o estoque"
 
 # (data, arquivo, ficha, durante a campanha?)
