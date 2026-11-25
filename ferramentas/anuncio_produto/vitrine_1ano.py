@@ -61,12 +61,16 @@ def capa():
 
 
 def fechamento():
-    return pagina('<div style="position:absolute;top:480px;left:0;right:0">'
-                  '<h1 style="font-size:120px">Até 30/11</h1><p class="sub" style="margin-top:20px">ou enquanto durar o estoque</p>'
-                  '<div class="rows" style="margin-top:70px">'
-                  '<div><b>R$ 300 OFF em qualquer iPhone</b></div><div><b>8 meses de garantia nos seminovos</b></div>'
-                  '<div><b>Capa + película de brinde</b></div><div><b>Cupom FONI1ANO no fonibr.com.br</b></div></div>'
-                  '<div style="margin-top:80px"><span class="cta">Chame no WhatsApp</span></div></div>')
+    itens = ["R$ 300 OFF em qualquer iPhone", "8 meses de garantia nos seminovos",
+             "Capa + película de brinde", "Cupom FONI1ANO no fonibr.com.br"]
+    lista = "".join(f'<p class="item">{t}</p>' for t in itens)
+    return pagina('<style>.item{font-size:40px;font-weight:600;padding:20px 0}.item+.item{border-top:1.5px solid #2C2C2E}'
+                  '.lista{width:760px;margin:70px auto 0}</style>'
+                  '<div style="position:absolute;top:430px;left:0;right:0">'
+                  '<h1 style="font-size:130px">Até 30/11</h1><p class="sub" style="margin-top:16px">ou enquanto durar o estoque</p>'
+                  f'<div class="lista">{lista}</div></div>'
+                  '<div style="position:absolute;top:1330px;left:0;right:0"><span class="cta">Chame no WhatsApp</span>'
+                  '<p class="note" style="margin-top:26px">Link na bio</p></div>', linha_y=1200)
 
 
 def tabela(h):
