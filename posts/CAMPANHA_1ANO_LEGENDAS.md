@@ -107,3 +107,11 @@ Destaque fixo "1 ANO" no perfil: adicionar os stories da campanha.
 **Story:** `foni_story_12h_1ano_obrigado.jpg`
 
 Depois: tirar o banner do site e desativar o cupom FONI1ANO.
+
+## Atualização 25/11/2026 — padrão oficial de anúncio
+Por decisão do Leonardo, toda peça com preço de produto saiu do formato antigo:
+- 27/11 12h, carrossel: `foni_12h_1ano_vitrine_01` a `_13.jpg` (capa + 11 modelos + fechamento), no padrão oficial. Com 13 slides, continua indo pelo app (a API aceita até 10).
+- 27/11, tabela: `foni_story_12h_1ano_tabela.jpg` e `foni_12h_1ano_tabela.jpg` refeitas.
+- Stories de produto de 26 a 29/11: arte nova com os mesmos nomes de arquivo das tarefas agendadas (ver ferramentas/anuncio_produto/campanha_1ano.py).
+- Removidos (formato antigo, sem uso): carrossel `foni_0743_1ano_vitrine_*`, stories `foni_story_1ano_modelo_03/04/07/08/09/10/14/15` e o Reel `foni_reel_18h_1ano_vitrine.mp4`.
+- Fora da vitrine por ora: iPhone 11 e seminovos 16/16 Pro/16 Pro Max (seminovos só 12 a 15), iPhone 13 (falta foto real).
