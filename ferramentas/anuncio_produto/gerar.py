@@ -33,7 +33,7 @@ CORES = {"preto": "#2b2b2e", "branco": "#f2f1ec", "white": "#f2f1ec", "rosa": "#
 FOTO_ALT = 620  # altura do aparelho na arte (px)
 
 
-def preparar_foto(caminho, altura=FOTO_ALT):
+def preparar_foto(caminho, altura=FOTO_ALT, esticar=1.0):
     """Fundo -> transparente (pela cor do canto), aparelho intacto, ampliação Lanczos + nitidez leve."""
     a = np.asarray(Image.open(caminho).convert("RGB")).astype(float)
     cantos = np.concatenate([a[:8, :8].reshape(-1, 3), a[:8, -8:].reshape(-1, 3)])
@@ -41,7 +41,8 @@ def preparar_foto(caminho, altura=FOTO_ALT):
     alpha = np.clip((np.abs(a - bg).max(2) - 6) / 10, 0, 1)
     im = Image.fromarray(a.astype("uint8")).convert("RGBA")
     im.putalpha(Image.fromarray((alpha * 255).astype("uint8")).filter(ImageFilter.GaussianBlur(0.6)))
-    big = im.resize((round(im.width * altura / im.height), altura), Image.LANCZOS)
+    # esticar > 1 corrige foto com aparelho "atarracado" (largura proporcionalmente maior que a do iPhone real)
+    big = im.resize((round(im.width * altura / im.height / esticar), altura), Image.LANCZOS)
     rgb = big.convert("RGB").filter(ImageFilter.UnsharpMask(radius=1.2, percent=60, threshold=2))
     rgb.putalpha(big.getchannel("A"))
     buf = io.BytesIO(); rgb.save(buf, "PNG")
@@ -127,10 +128,11 @@ def main():
     ap.add_argument("--garantia", default="8 meses de garantia")
     ap.add_argument("--promo", default="", help="linha discreta no rodapé (opcional)")
     ap.add_argument("--tamanho", default="normal", choices=list(TAMANHOS), help="pro / promax: foto menor / maior")
+    ap.add_argument("--esticar", type=float, default=1.0, help="proporção vertical da foto (ex.: 1.08)")
     ap.add_argument("--foto", required=True)
     ap.add_argument("--saida", required=True)
     a = ap.parse_args()
-    asyncio.run(render(html(a.modelo, a.cond, a.memoria, a.bateria, a.preco, a.cores, preparar_foto(a.foto, TAMANHOS[a.tamanho][0]), a.promo, a.garantia, a.rotulo2, a.de, a.tamanho), a.saida))
+    asyncio.run(render(html(a.modelo, a.cond, a.memoria, a.bateria, a.preco, a.cores, preparar_foto(a.foto, TAMANHOS[a.tamanho][0], a.esticar), a.promo, a.garantia, a.rotulo2, a.de, a.tamanho), a.saida))
     print(a.saida)
 
 
