@@ -71,6 +71,7 @@ def chips(cores):
 
 TAMANHOS = {  # (altura da foto, topo da foto, topo do bloco de preço, topo do título, topo da promo). Pro Max maior que o Pro, para mostrar a tela maior
     "normal": (620, 660, 1345, 235, 1760), "pequeno": (580, 690, 1345, 235, 1760), "pro": (700, 625, 1365, 235, 1760), "promax": (840, 562, 1440, 200, 1805),
+    "pro_solo": (760, 600, 1385, 235, 1800), "promax_solo": (900, 548, 1468, 200, 1860),  # só traseira: um pouco maior
     "mac": (600, 680, 1345, 235, 1760), "mac_grande": (720, 615, 1380, 235, 1790),
     "largo": (500, 730, 1345, 235, 1760)}  # foto bem horizontal (ex.: trio de Apple Watch)  # notebook: foto deitada, limitada pela largura
 
