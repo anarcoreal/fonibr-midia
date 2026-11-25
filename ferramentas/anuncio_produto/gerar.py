@@ -3,7 +3,7 @@
 Story 1080x1920, tudo centralizado:
   logo grande no alto · nome do modelo gigante · condição em verde (Seminovo/Novo)
   · specs em cinza · UM aparelho grande no centro · linha verde como "palco" sob o aparelho
-  · "À vista" + preço forte · cores com "ou" + garantia · botão verde "Chame no WhatsApp"
+  · "À vista" + preço forte · bolinhas de cor com o nome · garantia em linha própria · botão verde "Chame no WhatsApp"
   · promoção discreta no rodapé. Sem ponto final nas frases. Rodapé livre (campo de resposta do story).
 
 Foto: recorte de UM aparelho (ex.: produtos/iphone-14/iphone14_preto.png). O fundo é removido por
@@ -25,6 +25,11 @@ from pecas import luz, LOGO_URI  # noqa: E402
 from dados import brl  # noqa: E402
 
 H = 1920
+# Bolinhas de cor (estilo página de produto da Apple). Nome fora da lista -> bolinha cinza.
+CORES = {"preto": "#2b2b2e", "branco": "#f2f1ec", "white": "#f2f1ec", "rosa": "#f4b8c8", "azul": "#a9c1dd",
+         "verde": "#b9d9c3", "lilás": "#cbb9e2", "lavender": "#cbb9e2", "amarelo": "#f3e08a", "vermelho": "#d0202e",
+         "dourado": "#e9d4a9", "prata": "#e3e4e5", "silver": "#e3e4e5", "roxo": "#5d4b70", "laranja": "#f08a3c",
+         "titânio natural": "#bab4a9", "titânio deserto": "#c9b49b", "glacier": "#dfe8ee", "burgundy": "#6e1f2b"}
 FOTO_ALT = 660  # altura do aparelho na arte (px)
 
 
@@ -43,7 +48,15 @@ def preparar_foto(caminho, altura=FOTO_ALT):
     return "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode()
 
 
-def html(modelo, cond, spec, preco, cores, foto_uri, promo):
+def chips(cores):
+    """"Preto, Rosa ou Branco" -> bolinha + nome de cada cor, numa linha."""
+    import re
+    nomes = [c.strip() for c in re.split(r",| ou | e ", cores) if c.strip()]
+    return "".join(f'<span class="chip"><i style="background:{CORES.get(n.lower(), "#8e8e93")}"></i>{n}</span>' for n in nomes)
+
+
+def html(modelo, cond, spec, preco, cores, foto_uri, promo, garantia):
+    gar_div = f'<div class="gar">{garantia}</div>' if garantia else ""
     palco = luz("base", H, .9).replace(f"M-60 {H-200} Q540 {H-340} 1140 {H-260}", "M-60 1370 Q540 1250 1140 1310")
     promo_div = f'<div class="promo">{promo}</div>' if promo else ""
     return f"""<html><head><meta charset="utf-8"><style>
@@ -56,19 +69,22 @@ h1{{font-size:150px;font-weight:700;letter-spacing:-5px}}
 .eb{{font-size:40px;font-weight:600;color:#2FD35A;margin-top:4px}}
 .sub{{font-size:40px;font-weight:500;color:#A1A1A6;margin-top:8px}}
 .foto{{position:absolute;top:620px;left:50%;transform:translateX(-50%);height:{FOTO_ALT}px;-webkit-mask-image:linear-gradient(#000 88%,transparent)}}
-.base{{position:absolute;top:1340px;left:0;right:0}}
+.base{{position:absolute;top:1345px;left:0;right:0}}
 .de{{font-size:30px;color:#A1A1A6}}
 .preco{{font-size:104px;font-weight:700;letter-spacing:-3px;margin-top:4px}}
-.gar{{font-size:32px;color:#A1A1A6;margin-top:10px}}
-.cta{{display:inline-block;margin-top:44px;background:#2FD35A;color:#000;font-size:34px;font-weight:600;padding:22px 56px;border-radius:999px}}
-.promo{{position:absolute;top:1730px;left:0;right:0;font-size:28px;color:#6E6E73}}
+.cores{{margin-top:14px;display:flex;justify-content:center;gap:34px}}
+.chip{{font-size:30px;color:#D2D2D7;display:flex;align-items:center;gap:12px}}
+.chip i{{width:28px;height:28px;border-radius:50%;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35)}}
+.gar{{font-size:30px;color:#A1A1A6;margin-top:12px}}
+.cta{{display:inline-block;margin-top:30px;background:#2FD35A;color:#000;font-size:34px;font-weight:600;padding:22px 56px;border-radius:999px}}
+.promo{{position:absolute;top:1760px;left:0;right:0;font-size:28px;color:#6E6E73}}
 </style></head><body>
 {palco}
 <div class="logo"><img src="{LOGO_URI}"></div>
 <div class="top"><h1>{modelo}</h1><div class="eb">{cond}</div><div class="sub">{spec}</div></div>
 <img class="foto" src="{foto_uri}">
 <div class="base"><div class="de">À vista</div><div class="preco">{brl(preco)}</div>
-<div class="gar">{cores}</div>
+<div class="cores">{chips(cores)}</div>{gar_div}
 <div class="cta">Chame no WhatsApp</div></div>
 {promo_div}
 </body></html>"""
@@ -92,13 +108,12 @@ def main():
     ap.add_argument("--spec", required=True, help='ex.: "128 GB e bateria 100%%"')
     ap.add_argument("--preco", type=float, required=True)
     ap.add_argument("--cores", required=True, help='use "ou": "Preto ou Azul"')
-    ap.add_argument("--garantia", default="com 8 meses de garantia")
+    ap.add_argument("--garantia", default="8 meses de garantia")
     ap.add_argument("--promo", default="", help="linha discreta no rodapé (opcional)")
     ap.add_argument("--foto", required=True)
     ap.add_argument("--saida", required=True)
     a = ap.parse_args()
-    linha = f"{a.cores}, {a.garantia}" if a.garantia else a.cores
-    asyncio.run(render(html(a.modelo, a.cond, a.spec, a.preco, linha, preparar_foto(a.foto), a.promo), a.saida))
+    asyncio.run(render(html(a.modelo, a.cond, a.spec, a.preco, a.cores, preparar_foto(a.foto), a.promo, a.garantia), a.saida))
     print(a.saida)
 
 
