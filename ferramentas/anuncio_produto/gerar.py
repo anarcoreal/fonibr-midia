@@ -60,7 +60,7 @@ def chips(cores):
 
 
 TAMANHOS = {  # (altura da foto, topo da foto, topo do bloco de preço, topo do título, topo da promo). Pro Max maior que o Pro, para mostrar a tela maior
-    "normal": (620, 660, 1345, 235, 1760), "pro": (725, 615, 1375, 235, 1765), "promax": (800, 585, 1420, 215, 1790)}
+    "normal": (620, 660, 1345, 235, 1760), "pro": (700, 625, 1365, 235, 1760), "promax": (840, 562, 1440, 200, 1805)}
 
 
 def html(modelo, cond, memoria, bateria, preco, cores, foto_uri, promo, garantia, rotulo2="Saúde da bateria", de="À vista", tamanho="normal"):
