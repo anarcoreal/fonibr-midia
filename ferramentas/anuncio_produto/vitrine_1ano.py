@@ -15,7 +15,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from PIL import Image
 from fichas import FICHAS
 from campanha_1ano import gerar as gerar_story, POSTS, OFF
-from gerar import luz, LOGO_URI, H
+from gerar import luz, LOGO_URI, H, preparar_foto
+from fichas import PROD
 
 DIA = os.path.join(POSTS, "2026-11-27")
 MODELOS = ["iphone14", "iphone14pro", "iphone14promax", "iphone15", "iphone15pro", "iphone15promax",
@@ -52,25 +53,27 @@ def preco(ficha):
     return ("a partir de " + s) if "a partir" in f.get("de", "") else s
 
 
+def _heroi(titulo, verde, foto, linhas, esticar=1.0):
+    """Mesma linguagem do anúncio oficial: logo, título, linha verde, aparelho no palco, texto e botão."""
+    uri = preparar_foto(os.path.join(PROD, foto), 760, esticar)
+    sub = "".join(f'<p class="sub" style="font-size:34px;margin-top:10px">{t}</p>' for t in linhas)
+    return pagina('<style>.foto{position:absolute;top:520px;left:50%;transform:translateX(-50%);height:760px;'
+                  '-webkit-mask-image:linear-gradient(#000 88%,transparent)}</style>'
+                  f'<div style="position:absolute;top:255px;left:0;right:0"><h1>{titulo}</h1>'
+                  f'<div class="eb" style="margin-top:6px">{verde}</div></div>'
+                  f'<img class="foto" src="{uri}">'
+                  f'<div style="position:absolute;top:1350px;left:0;right:0">{sub}'
+                  '<div style="margin-top:44px"><span class="cta">Chame no WhatsApp</span></div></div>', linha_y=1285)
+
+
 def capa():
-    return pagina('<div style="position:absolute;top:560px;left:0;right:0">'
-                  '<div class="eb">1 ano de Foni BR</div><h1 style="margin-top:24px">A vitrine<br>abriu</h1>'
-                  '<p class="sub" style="margin-top:48px">R$ 300 OFF em qualquer iPhone<br>novo ou seminovo</p></div>'
-                  '<div style="position:absolute;top:1420px;left:0;right:0"><p class="sub">Arraste para ver os modelos</p></div>',
-                  linha_y=1300)
+    return _heroi("A vitrine abriu", "1 ano de Foni BR", "iphone-17-pro/iphone17pro_azul.png",
+                  ["R$ 300 OFF em qualquer iPhone", "Arraste para ver os modelos"])
 
 
 def fechamento():
-    itens = ["R$ 300 OFF em qualquer iPhone", "8 meses de garantia nos seminovos",
-             "Capa + película de brinde", "Cupom FONI1ANO no fonibr.com.br"]
-    lista = "".join(f'<p class="item">{t}</p>' for t in itens)
-    return pagina('<style>.item{font-size:40px;font-weight:600;padding:20px 0}.item+.item{border-top:1.5px solid #2C2C2E}'
-                  '.lista{width:760px;margin:70px auto 0}</style>'
-                  '<div style="position:absolute;top:430px;left:0;right:0">'
-                  '<h1 style="font-size:130px">Até 30/11</h1><p class="sub" style="margin-top:16px">ou enquanto durar o estoque</p>'
-                  f'<div class="lista">{lista}</div></div>'
-                  '<div style="position:absolute;top:1330px;left:0;right:0"><span class="cta">Chame no WhatsApp</span>'
-                  '<p class="note" style="margin-top:26px">Link na bio</p></div>', linha_y=1200)
+    return _heroi("R$ 300 OFF", "Até 30/11 ou enquanto durar o estoque", "iphone-18-pro/iphone18pro_glacier.png",
+                  ["Capa + película de brinde em toda compra", "No site, use o cupom FONI1ANO"], esticar=1.05)
 
 
 def tabela(h):
