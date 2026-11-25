@@ -55,12 +55,12 @@ def preco(ficha):
 
 def _heroi(titulo, verde, foto, linhas, esticar=1.0):
     """Mesma linguagem do anúncio oficial: logo, título, linha verde, aparelho no palco, texto e botão."""
-    uri = preparar_foto(os.path.join(PROD, foto), 760, esticar)
+    uri = preparar_foto(os.path.join(PROD, foto), 730, esticar)
     sub = "".join(f'<p class="sub" style="font-size:34px;margin-top:10px">{t}</p>' for t in linhas)
-    return pagina('<style>.foto{position:absolute;top:520px;left:50%;transform:translateX(-50%);height:760px;'
+    return pagina('<style>.foto{position:absolute;top:560px;left:50%;transform:translateX(-50%);height:730px;'
                   '-webkit-mask-image:linear-gradient(#000 88%,transparent)}</style>'
                   f'<div style="position:absolute;top:255px;left:0;right:0"><h1>{titulo}</h1>'
-                  f'<div class="eb" style="margin-top:6px">{verde}</div></div>'
+                  f'<div class="eb" style="margin-top:14px;font-size:56px;font-weight:700;color:#3DF06E">{verde}</div></div>'
                   f'<img class="foto" src="{uri}">'
                   f'<div style="position:absolute;top:1350px;left:0;right:0">{sub}'
                   '<div style="margin-top:44px"><span class="cta">Chame no WhatsApp</span></div></div>', linha_y=1285)
