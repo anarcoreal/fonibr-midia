@@ -59,12 +59,12 @@ def chips(cores):
     return "".join(out)
 
 
-TAMANHOS = {  # (altura da foto, topo da foto, topo do bloco de preço). Pro Max maior que o Pro, para mostrar a tela maior
-    "normal": (620, 660, 1345), "pro": (690, 630, 1360), "promax": (760, 618, 1400)}
+TAMANHOS = {  # (altura da foto, topo da foto, topo do bloco de preço, topo do título, topo da promo). Pro Max maior que o Pro, para mostrar a tela maior
+    "normal": (620, 660, 1345, 235, 1760), "pro": (725, 615, 1375, 235, 1765), "promax": (800, 585, 1420, 215, 1790)}
 
 
 def html(modelo, cond, memoria, bateria, preco, cores, foto_uri, promo, garantia, rotulo2="Saúde da bateria", de="À vista", tamanho="normal"):
-    falt, ftop, btop = TAMANHOS[tamanho]
+    falt, ftop, btop, ttop, ptop = TAMANHOS[tamanho]
     gar_div = f'<div class="gar">{garantia}</div>' if garantia else ""
     palco = luz("base", H, .9).replace(f"M-60 {H-200} Q540 {H-340} 1140 {H-260}", "M-60 1370 Q540 1250 1140 1310")
     promo_div = f'<div class="promo">{promo}</div>' if promo else ""
@@ -73,7 +73,7 @@ def html(modelo, cond, memoria, bateria, preco, cores, foto_uri, promo, garantia
 body{{width:1080px;height:{H}px;background:#000;color:#F5F5F7;font-family:'Inter',sans-serif;overflow:hidden;position:relative;-webkit-font-smoothing:antialiased;text-align:center}}
 .glow{{position:absolute;left:0;top:0}}
 .logo{{position:absolute;top:120px;left:0;right:0}} .logo img{{width:360px}}
-.top{{position:absolute;top:235px;left:0;right:0}}
+.top{{position:absolute;top:{ttop}px;left:0;right:0}}
 h1{{font-size:150px;font-weight:700;letter-spacing:-5px;white-space:nowrap;display:inline-block;height:182px;line-height:182px}}
 .eb{{font-size:40px;font-weight:600;color:#2FD35A;margin-top:4px}}
 .specs{{display:flex;justify-content:center;margin-top:26px}}
@@ -89,7 +89,7 @@ h1{{font-size:150px;font-weight:700;letter-spacing:-5px;white-space:nowrap;displ
 .chip i{{width:28px;height:28px;border-radius:50%;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35)}}
 .gar{{font-size:30px;color:#A1A1A6;margin-top:12px}}
 .cta{{display:inline-block;margin-top:30px;background:#2FD35A;color:#000;font-size:34px;font-weight:600;padding:22px 56px;border-radius:999px}}
-.promo{{position:absolute;top:1760px;left:0;right:0;font-size:28px;color:#6E6E73}}
+.promo{{position:absolute;top:{ptop}px;left:0;right:0;font-size:28px;color:#6E6E73}}
 </style></head><body>
 {palco}
 <div class="logo"><img src="{LOGO_URI}"></div>
