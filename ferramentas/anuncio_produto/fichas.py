@@ -70,7 +70,7 @@ FICHAS = {
                         esfumar=True, foto="apple-watch-se3/watchse3_meianoite.png"),
     "watchse3_44": dict(modelo="Apple Watch SE 3", cond="GPS", specs="44 mm:", preco=PENDENTE,
                         cores="Meia-noite:#1f2329 ou Estelar:#e9dfcf", garantia="", tamanho="pro",
-                        esfumar=True, foto="apple-watch-se3/watchse3_estelar.png"),  # FALTA FOTO: estelar sozinho (na foto atual fica cortado)
+                        esfumar=True, limiar=40, foto="apple-watch-se3/watchse3_estelar.png"),
     "watchs12": dict(modelo="Apple Watch Series 12", cond="GPS", specs="46 mm:", preco=PENDENTE,
                      cores="Cinza:#5a5a5e, Preto, Estelar:#e6dccb ou Bronze:#7a6352", garantia="", tamanho="pro",
                      esfumar=True, foto="apple-watch-s12/watchs12_bronze.png"),
