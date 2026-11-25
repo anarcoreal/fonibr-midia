@@ -1,1 +1,3 @@
-Apple Watch Ultra 4, 49 mm, GPS + Cellular. Os relogios se sobrepoem na foto; para anuncio use watchultra4_trio.png com --tamanho largo --esfumar (fundo em degrade).
+Apple Watch Ultra 4, 49 mm, GPS + Cellular.
+Anuncio: um relogio so (watchultra4_natural.png) com --tamanho pro --esfumar; cores como opcoes embaixo.
+watchultra4_trio.png: os tres juntos (se sobrepoem na foto).
