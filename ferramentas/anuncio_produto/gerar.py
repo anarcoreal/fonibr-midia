@@ -33,12 +33,18 @@ CORES = {"preto": "#2b2b2e", "branco": "#f2f1ec", "white": "#f2f1ec", "rosa": "#
 FOTO_ALT = 620  # altura do aparelho na arte (px)
 
 
-def preparar_foto(caminho, altura=FOTO_ALT, esticar=1.0):
+def preparar_foto(caminho, altura=FOTO_ALT, esticar=1.0, esfumar=False):
     """Fundo -> transparente (pela cor do canto), aparelho intacto, ampliação Lanczos + nitidez leve."""
     a = np.asarray(Image.open(caminho).convert("RGB")).astype(float)
     cantos = np.concatenate([a[:8, :8].reshape(-1, 3), a[:8, -8:].reshape(-1, 3)])
     bg = cantos.mean(0)
     alpha = np.clip((np.abs(a - bg).max(2) - 6) / 10, 0, 1)
+    # --esfumar: bordas esfumadas para fotos com fundo em degradê (some a "caixa"). Desligado por padrão: corta a lateral dos iPhones
+    h, w = alpha.shape
+    ry = np.clip(np.minimum(np.arange(h), np.arange(h)[::-1]) / (0.08 * h), 0, 1)
+    rx = np.clip(np.minimum(np.arange(w), np.arange(w)[::-1]) / (0.06 * w), 0, 1)
+    if esfumar:
+        alpha = alpha * np.minimum.outer(ry, rx)
     im = Image.fromarray(a.astype("uint8")).convert("RGBA")
     im.putalpha(Image.fromarray((alpha * 255).astype("uint8")).filter(ImageFilter.GaussianBlur(0.6)))
     # esticar > 1 corrige foto com aparelho "atarracado" (largura proporcionalmente maior que a do iPhone real)
@@ -62,7 +68,8 @@ def chips(cores):
 
 TAMANHOS = {  # (altura da foto, topo da foto, topo do bloco de preço, topo do título, topo da promo). Pro Max maior que o Pro, para mostrar a tela maior
     "normal": (620, 660, 1345, 235, 1760), "pro": (700, 625, 1365, 235, 1760), "promax": (840, 562, 1440, 200, 1805),
-    "mac": (600, 680, 1345, 235, 1760), "mac_grande": (720, 615, 1380, 235, 1790)}  # notebook: foto deitada, limitada pela largura
+    "mac": (600, 680, 1345, 235, 1760), "mac_grande": (720, 615, 1380, 235, 1790),
+    "largo": (500, 730, 1345, 235, 1760)}  # foto bem horizontal (ex.: trio de Apple Watch)  # notebook: foto deitada, limitada pela largura
 
 
 def html(modelo, cond, memoria, bateria, preco, cores, foto_uri, promo, garantia, rotulo2="Saúde da bateria", de="À vista", tamanho="normal", specs=None):
@@ -134,6 +141,7 @@ def main():
     ap.add_argument("--promo", default="", help="linha discreta no rodapé (opcional)")
     ap.add_argument("--tamanho", default="normal", choices=list(TAMANHOS), help="pro / promax: foto menor / maior")
     ap.add_argument("--esticar", type=float, default=1.0, help="proporção vertical da foto (ex.: 1.08)")
+    ap.add_argument("--esfumar", action="store_true", help="esfuma as bordas da foto (fundo em degradê)")
     ap.add_argument("--foto", required=True)
     ap.add_argument("--saida", required=True)
     a = ap.parse_args()
@@ -141,7 +149,7 @@ def main():
         a.preco = float(a.preco)
     except ValueError:
         pass
-    asyncio.run(render(html(a.modelo, a.cond, a.memoria, a.bateria, a.preco, a.cores, preparar_foto(a.foto, TAMANHOS[a.tamanho][0], a.esticar), a.promo, a.garantia, a.rotulo2, a.de, a.tamanho,
+    asyncio.run(render(html(a.modelo, a.cond, a.memoria, a.bateria, a.preco, a.cores, preparar_foto(a.foto, TAMANHOS[a.tamanho][0], a.esticar, a.esfumar), a.promo, a.garantia, a.rotulo2, a.de, a.tamanho,
                              [tuple(x.split(":", 1)) for x in a.specs.split("|")] if a.specs else None), a.saida))
     print(a.saida)
 
