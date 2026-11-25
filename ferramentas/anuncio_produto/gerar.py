@@ -52,7 +52,11 @@ def chips(cores):
     """"Preto, Rosa ou Branco" -> bolinha + nome de cada cor, numa linha."""
     import re
     nomes = [c.strip() for c in re.split(r",| ou | e ", cores) if c.strip()]
-    return "".join(f'<span class="chip"><i style="background:{CORES.get(n.lower(), "#8e8e93")}"></i>{n}</span>' for n in nomes)
+    out = []
+    for n in nomes:  # "Azul:#2c3e66" força a cor da bolinha (ex.: Azul Profundo do 17 Pro)
+        nome, _, hexa = n.partition(":")
+        out.append(f'<span class="chip"><i style="background:{hexa or CORES.get(nome.lower(), "#8e8e93")}"></i>{nome}</span>')
+    return "".join(out)
 
 
 def html(modelo, cond, memoria, bateria, preco, cores, foto_uri, promo, garantia, rotulo2="Saúde da bateria", de="À vista"):
