@@ -102,7 +102,7 @@ h1{{font-size:150px;font-weight:700;letter-spacing:-5px;white-space:nowrap;displ
 .base{{position:absolute;top:{btop}px;left:0;right:0}}
 .de{{font-size:30px;color:#A1A1A6}}
 .preco{{font-size:104px;font-weight:700;letter-spacing:-3px;margin-top:4px}}
-.cores{{margin-top:14px;display:flex;justify-content:center;gap:34px}}
+.cores{{margin:14px auto 0;max-width:960px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px 34px}}
 .chip{{font-size:30px;color:#D2D2D7;display:flex;align-items:center;gap:12px}}
 .chip i{{width:28px;height:28px;border-radius:50%;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35)}}
 .gar{{font-size:30px;color:#A1A1A6;margin-top:12px}}

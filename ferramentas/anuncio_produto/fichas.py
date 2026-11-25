@@ -35,6 +35,13 @@ FICHAS = {
     "iphone16": dict(modelo="iPhone 16", memoria="128 GB", bateria="87%+", preco=4300,
                      cores="Preto, Rosa ou Branco", promo=PROMO, foto="iphone-16/iphone16_preto.png"),
     # ---------------- iPhones novos (lacrados)
+    # 16 Pro / 16 Pro Max: só lacrado (regra 25/11); preço do lacrado ainda não informado
+    "iphone16pro": dict(modelo="iPhone 16 Pro", cond="Novo", memoria="128 GB", bateria="Lacrado", rotulo2="Condição",
+                        preco=PENDENTE, cores="Preto:#3a3a3c, Branco:#e8e6e1, Natural:#bab4a9 ou Deserto:#c9b49b", garantia="", promo=PROMO, tamanho="pro_solo", limiar=34,
+                        foto="iphone-16-pro/iphone16pro_deserto.png"),
+    "iphone16promax": dict(modelo="iPhone 16 Pro Max", cond="Novo", memoria="256 GB", bateria="Lacrado", rotulo2="Condição",
+                           preco=PENDENTE, cores="Preto:#3a3a3c, Branco:#e8e6e1, Natural:#bab4a9 ou Deserto:#c9b49b", garantia="", promo=PROMO, tamanho="promax_solo", limiar=34,
+                           foto="iphone-16-pro/iphone16pro_natural.png"),
     "iphone17": dict(modelo="iPhone 17", cond="Novo", memoria="256 GB", bateria="Lacrado", rotulo2="Condição",
                      de="À vista, a partir de", preco=6380, cores="Preto, Branco, Azul, Verde ou Lavanda", garantia="",
                      promo=PROMO, foto="iphone-17/iphone17_preto.png"),
