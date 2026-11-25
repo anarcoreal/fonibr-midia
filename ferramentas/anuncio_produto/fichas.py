@@ -28,6 +28,10 @@ FICHAS = {
                            cores="Preto:#3a3a3c ou Roxo:#5d4b70", promo=PROMO, tamanho="promax_solo", foto="iphone-14-pro/iphone14pro_roxo.png"),
     "iphone15": dict(modelo="iPhone 15", memoria="128 GB", bateria="85%+", preco=3450,
                      cores="Preto ou Azul", promo=PROMO, foto="iphone-15/iphone15_preto.png"),
+    "iphone15pro": dict(modelo="iPhone 15 Pro", memoria="128 GB", bateria="90%", preco=4170,
+                        cores="Titânio natural:#bab4a9", promo=PROMO, tamanho="pro_solo", foto="iphone-15-pro/iphone15pro_natural.png"),
+    "iphone15promax": dict(modelo="iPhone 15 Pro Max", memoria="256 GB", bateria="90%+", preco=4700,
+                           cores="Titânio natural:#bab4a9", promo=PROMO, tamanho="promax_solo", foto="iphone-15-pro/iphone15pro_natural.png"),
     "iphone16": dict(modelo="iPhone 16", memoria="128 GB", bateria="87%+", preco=4300,
                      cores="Preto, Rosa ou Branco", promo=PROMO, foto="iphone-16/iphone16_preto.png"),
     # ---------------- iPhones novos (lacrados)
