@@ -59,7 +59,12 @@ def chips(cores):
     return "".join(out)
 
 
-def html(modelo, cond, memoria, bateria, preco, cores, foto_uri, promo, garantia, rotulo2="Saúde da bateria", de="À vista"):
+TAMANHOS = {  # (altura da foto, topo da foto, topo do bloco de preço). Pro Max maior que o Pro, para mostrar a tela maior
+    "normal": (620, 660, 1345), "pro": (690, 630, 1360), "promax": (760, 618, 1400)}
+
+
+def html(modelo, cond, memoria, bateria, preco, cores, foto_uri, promo, garantia, rotulo2="Saúde da bateria", de="À vista", tamanho="normal"):
+    falt, ftop, btop = TAMANHOS[tamanho]
     gar_div = f'<div class="gar">{garantia}</div>' if garantia else ""
     palco = luz("base", H, .9).replace(f"M-60 {H-200} Q540 {H-340} 1140 {H-260}", "M-60 1370 Q540 1250 1140 1310")
     promo_div = f'<div class="promo">{promo}</div>' if promo else ""
@@ -75,8 +80,8 @@ h1{{font-size:150px;font-weight:700;letter-spacing:-5px;white-space:nowrap;displ
 .spec{{padding:0 54px}} .spec+.spec{{border-left:1.5px solid #3A3A3C}}
 .spec b{{display:block;font-size:50px;font-weight:600;letter-spacing:-1px}}
 .spec span{{display:block;font-size:24px;color:#A1A1A6;margin-top:6px}}
-.foto{{position:absolute;top:660px;left:50%;transform:translateX(-50%);height:{FOTO_ALT}px;-webkit-mask-image:linear-gradient(#000 88%,transparent)}}
-.base{{position:absolute;top:1345px;left:0;right:0}}
+.foto{{position:absolute;top:{ftop}px;left:50%;transform:translateX(-50%);height:{falt}px;-webkit-mask-image:linear-gradient(#000 88%,transparent)}}
+.base{{position:absolute;top:{btop}px;left:0;right:0}}
 .de{{font-size:30px;color:#A1A1A6}}
 .preco{{font-size:104px;font-weight:700;letter-spacing:-3px;margin-top:4px}}
 .cores{{margin-top:14px;display:flex;justify-content:center;gap:34px}}
@@ -121,10 +126,11 @@ def main():
     ap.add_argument("--cores", required=True, help='use "ou": "Preto ou Azul"')
     ap.add_argument("--garantia", default="8 meses de garantia")
     ap.add_argument("--promo", default="", help="linha discreta no rodapé (opcional)")
+    ap.add_argument("--tamanho", default="normal", choices=list(TAMANHOS), help="pro / promax: foto menor / maior")
     ap.add_argument("--foto", required=True)
     ap.add_argument("--saida", required=True)
     a = ap.parse_args()
-    asyncio.run(render(html(a.modelo, a.cond, a.memoria, a.bateria, a.preco, a.cores, preparar_foto(a.foto), a.promo, a.garantia, a.rotulo2, a.de), a.saida))
+    asyncio.run(render(html(a.modelo, a.cond, a.memoria, a.bateria, a.preco, a.cores, preparar_foto(a.foto, TAMANHOS[a.tamanho][0]), a.promo, a.garantia, a.rotulo2, a.de, a.tamanho), a.saida))
     print(a.saida)
 
 
