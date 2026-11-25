@@ -1,1 +1,1 @@
-Apple Watch Series 11, 46 mm, GPS. Anuncio: um relogio so (watchs11_cinza.png, o da ponta direita, com a pulseira bege do vizinho apagada) --tamanho pro --esfumar; cores como opcoes embaixo.
+Apple Watch Series 11, GPS, caixas 42 mm e 46 mm. Anuncio: 42 mm com watchs11_preto.png e 46 mm com watchs11_cinza.png (cor diferente em cada versao), --esfumar; cores como opcoes embaixo.

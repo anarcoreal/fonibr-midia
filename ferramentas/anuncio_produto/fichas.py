@@ -61,7 +61,7 @@ FICHAS = {
                         foto="apple-watch-ultra-4/watchultra4_natural.png"),
     "watchs11_42": dict(modelo="Apple Watch Series 11", cond="GPS", specs="42 mm:Caixa", preco=PENDENTE,
                         cores="Preto brilhante:#1c1c1e, Prata, Ouro rosa:#e8c4b4 ou Cinza-espacial:#6b6b70", garantia="", tamanho="pequeno",
-                        esfumar=True, foto="apple-watch-s11/watchs11_cinza.png"),
+                        esfumar=True, foto="apple-watch-s11/watchs11_preto.png"),
     "watchs11_46": dict(modelo="Apple Watch Series 11", cond="GPS", specs="46 mm:Caixa", preco=PENDENTE,
                         cores="Preto brilhante:#1c1c1e, Prata, Ouro rosa:#e8c4b4 ou Cinza-espacial:#6b6b70", garantia="", tamanho="pro",
                         esfumar=True, foto="apple-watch-s11/watchs11_cinza.png"),
