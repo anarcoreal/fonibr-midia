@@ -53,6 +53,9 @@ FICHAS = {
     "watchs12": dict(modelo="Apple Watch Series 12", cond="GPS", specs="46 mm:Caixa", preco=PENDENTE,
                      cores="Cinza:#5a5a5e, Preto, Estelar:#e6dccb ou Bronze:#7a6352", garantia="", tamanho="pro",
                      esfumar=True, foto="apple-watch-s12/watchs12_bronze.png"),
+    "fonte_cabo_usbc": dict(modelo="Fonte + Cabo USB-C", cond="Carregador completo", specs="USB-C:Fonte|USB-C para USB-C:Cabo",
+                            preco=PENDENTE, cores="Branco", garantia="", tamanho="mac",
+                            foto="fonte-cabo-usbc/fonte_cabo_usbc.png"),
 }
 
 
